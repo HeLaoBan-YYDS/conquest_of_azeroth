@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ChevronRight, ExternalLink, Menu } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import { NAVIGATION_CONFIG } from "@/config/navigation";
@@ -31,8 +32,8 @@ export async function SiteHeader({ locale }: { locale: string }) {
   const header = (
     <div className="flex items-center justify-between gap-4">
       <Link href={localizeHref("/", locale)} className="flex items-center gap-3">
-        <span className="grid h-9 w-9 place-items-center rounded-xl border border-[hsl(var(--nav-theme-light))] bg-[hsl(var(--nav-theme))] text-sm font-extrabold text-primary-foreground shadow-sm" aria-hidden="true">
-          C
+        <span className="grid h-9 w-9 shrink-0 place-items-center overflow-hidden rounded-xl border border-[hsl(var(--nav-theme-light))] bg-black shadow-sm" aria-hidden="true">
+          <Image src="/android-chrome-192x192.png" alt="" width={36} height={36} className="h-full w-full object-cover" priority />
         </span>
         <span className="text-sm font-bold tracking-wide text-foreground">Conquest of Azeroth</span>
       </Link>
