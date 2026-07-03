@@ -29,18 +29,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const paths = [...staticPaths, ...dynamicPaths];
   const contentTypePaths = new Set(contentTypeStaticPaths);
 
-  const languageAlternates = (path: string) => ({
-    "x-default": getLocalizedUrl(siteUrl, routing.defaultLocale, path),
-    ...Object.fromEntries(routing.locales.map((locale) => [locale, getLocalizedUrl(siteUrl, locale, path)])),
-  });
-
   return routing.locales.flatMap((locale) =>
     paths.map((path) => ({
       url: getLocalizedUrl(siteUrl, locale, path),
       lastModified,
       changeFrequency: path === "/" ? "daily" : "weekly",
       priority: path === "/" ? 1 : contentTypePaths.has(path) ? 0.8 : 0.6,
-      alternates: { languages: languageAlternates(path) },
     })),
   );
 }
