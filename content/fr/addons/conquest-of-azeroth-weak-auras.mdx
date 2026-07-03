@@ -1,0 +1,155 @@
+export const metadata = {
+  title: "Weak Auras pour Conquest of Azeroth",
+  description: "Maîtrisez l'interface de votre classe personnalisée avec ce guide complet pour configurer et personnaliser les Weak Auras de Conquest of Azeroth sur Project Ascension.",
+  category: "addons",
+  date: "2026-07-03",
+}
+
+Conquest of Azeroth est l'une des refontes de classes personnalisées les plus ambitieuses de l'histoire de World of Warcraft, mais suivre vos nouvelles rotations complexes peut être incroyablement difficile sans les bons outils. Si vous souhaitez optimiser votre DPS et suivre vos ressources personnalisées, la configuration de **conquest of azeroth weak auras** est absolument essentielle. Dans ce guide, nous vous accompagnerons pas à pas pour télécharger la version correcte de cet addon, trouver les ID de sorts personnalisés et configurer vos propres **conquest of azeroth weak auras**. Avec 21 classes entièrement personnalisées et plus de 60 spécialisations, les éléments d'interface standard ne suffisent tout simplement pas. Pour dominer véritablement le champ de bataille, vous avez besoin d'une interface hautement réactive et personnalisée.
+
+## Les fondations essentielles : WeakAuras 3.0 vs. 2.0
+
+Les serveurs personnalisés de World of Warcraft redéfinissent complètement la boucle de gameplay classique des MMORPG. Le projet massif Project Ascension, avec Conquest of Azeroth, introduit 21 classes entièrement personnalisées et 69 spécialisations distinctes basées directement sur le lore de Warcraft. Cependant, pour piloter avec succès ces classes, vous avez besoin d'une interface utilisateur robuste.
+
+Selon l'expérience des joueurs et les rapports de la communauté, le lanceur d'addons par défaut de Project Ascension télécharge souvent WeakAuras 2.0. Bien que cette version héritée convienne au gameplay standard de Wrath of the Lich King (WotLK), elle manque de fonctionnalités avancées, d'optimisations de performance et de la compatibilité des scripts nécessaires pour les classes personnalisées.
+
+Pour créer des déclencheurs fiables, vous devez contourner la version du lanceur standard et installer le fork de WeakAuras 3.0 rétroporté par Bunny67. L'utilisation de la version appropriée garantit que vos **conquest of azeroth weak auras** personnalisées ne provoquent pas de latence de l'interface ou d'erreurs de script lors de rencontres de raid intenses.
+
+| Fonctionnalité | WeakAuras 2.0 (Version Launcher) | WeakAuras 3.0 (Version GitHub de Bunny67) |
+| :--- | :--- | :--- |
+| **Performance** | Utilisation CPU élevée, saccades fréquentes | Gestion de la mémoire optimisée, framerate fluide |
+| **Déclencheurs avancés** | Support limité du code personnalisé | Fonctions de déclenchement et sous-éléments robustes |
+| **Sous-éléments** | Suivi basique du texte et de la progression | Ancrage de texte avancé, textes multiples |
+| **Compatibilité** | Échoue avec les ID de sorts complexes | Conçu spécifiquement pour les serveurs WotLK custom |
+| **Personnalisation UI** | Options d'ancrage et de taille basiques | Aimantage magnétique et alignement au pixel près |
+
+## Guide d'installation étape par étape pour Conquest of Azeroth
+
+L'installation de la version de WeakAuras de Bunny67 nécessite une installation manuelle, mais le processus est très simple. Les rapports de la communauté suggèrent que de nombreux problèmes d'installation proviennent de dossiers imbriqués. Lorsque vous téléchargez un dossier zip depuis GitHub, il s'extrait généralement dans un dossier "master". Si vous faites glisser ce dossier master directement dans votre répertoire d'addons, World of Warcraft ne le reconnaîtra pas.
+
+Pour installer l'addon correctement, suivez ces étapes :
+
+* Rendez-vous sur le dépôt GitHub WeakAuras-WotLK de Bunny67.
+* Cliquez sur le bouton vert "Code" et sélectionnez "Download ZIP".
+* Extrayez le fichier ZIP téléchargé sur votre bureau.
+* Ouvrez le dossier extrait ; vous verrez un dossier nommé `WeakAuras-WotLK-master` ou similaire.
+* À l'intérieur de ce dossier master, vous trouverez quatre sous-dossiers critiques : `WeakAuras`, `WeakAurasArchive`, `WeakAurasModelPaths` et `WeakAurasOptions`.
+* Coupez ou copiez ces quatre sous-dossiers.
+* Collez-les directement dans votre répertoire World of Warcraft sous `Interface\AddOns`.
+
+Une fois ces dossiers correctement placés, vous disposerez du framework moderne requis pour exécuter des **conquest of azeroth weak auras** avancées sans aucun problème de compatibilité.
+
+| Nom du dossier | Description | Requis ? |
+| :--- | :--- | :--- |
+| `WeakAuras` | Le moteur principal qui traite les déclencheurs et charge les graphismes | **Oui** |
+| `WeakAurasArchive` | Stocke les données historiques et les profils de configuration | **Oui** |
+| `WeakAurasModelPaths` | Contient les définitions de modèles 3D pour les effets visuels | **Oui** |
+| `WeakAurasOptions` | Le menu de configuration en jeu (accessible via `/wa`) | **Oui** |
+
+## Addons essentiels pour les ID de sorts personnalisés
+
+Comme Conquest of Azeroth propose des classes entièrement personnalisées, les sites de bases de données standard ne possèdent pas les ID de sorts pour ces capacités uniques. Chaque classe personnalisée — que vous jouiez Barbare, Féticheur, Cultiste, Nécromancien ou Gardien — utilise des ID de sorts uniques côté serveur.
+
+Pour trouver ces ID, vous devez installer un addon appelé `IDTip`. Cet utilitaire léger ajoute l'ID du sort, l'ID de l'objet et l'ID du PNJ au bas de toutes les infobulles en jeu.
+
+Pour configurer IDTip :
+
+* Téléchargez IDTip pour le patch 3.3.5a (WotLK) depuis une base de données d'addons fiable.
+* Extrayez le dossier et placez-le directement dans votre répertoire `Interface\AddOns`.
+* Connectez-vous au jeu et survolez n'importe quel sort dans votre grimoire, buff sur votre barre de buffs ou débuff sur un ennemi.
+* Regardez tout en bas de l'infobulle pour trouver l'ID numérique du sort.
+
+Avec IDTip installé, vous pouvez extraire sans effort les ID numériques exacts requis pour programmer vos déclencheurs de **conquest of azeroth weak auras**.
+
+| Classe | Exemple Sort / Débuff | ID de sort (Tooltip) | Type de déclencheur |
+| :--- | :--- | :--- | :--- |
+| **Barbare** | Carnage (Débuff) | 802864 | Aura cible (Débuff) |
+| **Barbare** | Crushing Slam (Capacité) | 501003 | Temps de recharge (Spell) |
+| **Barbare** | War Cry (Capacité) | 500995 | Temps de recharge (Spell) |
+| **Barbare** | Ancestral Might (Buff) | *Utiliser le Nom* | Aura joueur (Buff) |
+
+## Créer vos premières barres de ressources personnalisées
+
+Une fois vos addons correctement configurés, vous pouvez commencer à construire votre interface. Dans WeakAuras, vous travaillerez principalement avec trois onglets : **Affichage**, **Déclencheur** et **Charger**. L'onglet Affichage contrôle l'apparence de l'aura, l'onglet Déclencheur dicte quand l'aura apparaît, et l'onglet Charger restreint l'aura à des classes ou des zones spécifiques.
+
+Commençons par suivre les points de vie et l'énergie de base de votre personnage.
+
+### Création de la barre de vie
+1. Tapez `/wa` dans votre console de chat pour ouvrir le tableau de bord WeakAuras.
+2. Sélectionnez **Nouvelle aura** et choisissez **Barre de progression**. Nommez-la `HP Bar`.
+3. Allez dans l'onglet **Déclencheur**. Changez le type de déclencheur pour **Infos de l'unité (joueur)**, réglez la propriété sur **Santé** et l'unité sur **Joueur**.
+4. Allez dans l'onglet **Affichage**. Faites défiler jusqu'aux sous-éléments (Texte 1 et Texte 2). Supprimez la variable `%N` (Nom) pour que seule la valeur de santé soit visible.
+5. Sous la section Ancres, changez l'alignement du texte d'automatique à **Centre/Centre**.
+6. Changez la couleur de la barre en un vert vif.
+
+### Création de la barre d'énergie
+Au lieu de créer une nouvelle barre à partir de zéro, vous pouvez gagner du temps en dupliquant votre barre de vie. Faites un clic droit sur votre `HP Bar` dans le menu WeakAuras et sélectionnez **Dupliquer**. Renommez ce duplicata en `Energy Bar`.
+
+1. Allez dans l'onglet **Déclencheur** de la nouvelle `Energy Bar`.
+2. Changez la propriété de Santé à **Puissance**.
+3. Cochez la case "Type de puissance" et sélectionnez **Énergie** (ou Mana/Rage, selon votre classe personnalisée).
+4. Allez dans l'onglet **Affichage** et changez la couleur de la barre en un jaune vif.
+
+### Grouper vos éléments
+Pour garder votre interface organisée, vous devriez toujours placer les éléments associés dans un groupe. Cliquez sur le bouton "Nouveau groupe" en haut du menu et nommez-le `Class Showcase`. Cliquez sur la petite icône de flèche à côté de vos barres de vie et d'énergie pour les pousser dans ce groupe. Le groupement est une étape d'organisation vitale qui garde vos **conquest of azeroth weak auras** propres, ordonnées et faciles à repositionner sur votre écran.
+
+## Suivi des mécaniques de classe : Stacks de Carnage et Cooldowns
+
+Maintenant que vos barres de ressources sont configurées, il est temps de suivre les mécaniques spécifiques à la classe. Prenons la classe Barbare comme exemple. En jouant Barbare, attaquer les cibles génère des charges de "Carnage", un débuff personnalisé qui augmente considérablement les dégâts de vos autres capacités, comme Crushing Slam. Le suivi de ces charges est crucial pour maximiser votre rotation.
+
+### Suivi des charges de Carnage (Débuff cible)
+1. Créez une **Nouvelle aura** et sélectionnez **Icône**. Réglez les dimensions à 40x40.
+2. Allez dans l'onglet **Déclencheur**. Réglez le type sur **Aura**, l'unité sur **Cible** et le type d'aura sur **Débuff**.
+3. Cochez la case "ID de sort exact" et entrez `802864` (l'ID de sort personnalisé pour Carnage).
+4. Faites défiler vers le bas et réglez le déclencheur sur "Afficher si l'unité n'existe pas" afin que l'icône reste sur votre écran même lorsque vous n'avez pas de cible active.
+5. Dans l'onglet **Affichage**, trouvez le sous-élément texte (qui est par défaut `%s` pour les stacks). Réglez son ancre sur **Centre/Centre** et augmentez la taille de la police pour voir facilement votre nombre de charges.
+
+### Suivi de Crushing Slam (Temps de recharge)
+1. Dupliquez votre icône Carnage et renommez-la `Crushing Slam`.
+2. Allez dans l'onglet **Déclencheur**. Changez le type pour **Sort** et réglez la propriété sur **Temps de recharge/Charges/Nombre**.
+3. Entrez l'ID de sort personnalisé `501003` pour Crushing Slam. Changez le paramètre d'affichage sur **Toujours**.
+4. Dans l'onglet **Affichage**, cochez la case **Temps de recharge**.
+5. Parce que nous voulons que l'icône s'affiche quand la capacité est prête, cochez la case **Inverser**. Cela rend l'icône désaturée (en noir et blanc) pendant le temps de recharge et elle se remplit lentement à mesure que le cooldown se termine.
+6. Changez la variable de texte de `%s` (stacks) à `%p` (progression) pour afficher le minuteur de recharge restant.
+
+### Suivi de War Cry
+Pour suivre vos autres cooldowns principaux, dupliquez simplement l'icône `Crushing Slam`, renommez-la en `War Cry`, et changez l'ID du sort dans l'onglet Déclencheur par `500995`. En dupliquant les éléments existants, vous pouvez rapidement construire une suite complète de **conquest of azeroth weak auras** pour n'importe laquelle des 21 classes personnalisées.
+
+## Suivi avancé des buffs pour les classes personnalisées
+
+Pour les self-buffs comme "Ancestral Might" du Barbare, le suivi par ID de sort peut en fait poser problème. Sur le [site officiel de Project Ascension](https://ascension.gg), les développeurs ajustent et mettent à jour continuellement les classes personnalisées. Lorsque vous apprenez un nouveau rang d'un buff personnalisé, le serveur lui attribue souvent un tout nouvel ID de sort.
+
+Si vous codez en dur un ID de sort dans votre suivi de buff, l'aura cessera de fonctionner dès que vous monterez de niveau et apprendrez un nouveau rang. Pour éviter cela, suivez toujours les self-buffs en utilisant leur **Nom** exact plutôt que leur ID de sort.
+
+Pour configurer un rappel de buff manquant pour Ancestral Might :
+
+* Créez une **Nouvelle aura** et sélectionnez **Icône**. Réglez sa taille à 20x20 et placez-la sur le côté de vos barres de ressources principales.
+* Dans l'onglet **Déclencheur**, réglez le type sur **Aura**, l'unité sur **Joueur** et le type d'aura sur **Buff**.
+* Dans le champ Nom, tapez `Ancestral Might` exactement comme il apparaît en jeu.
+* Réglez l'option "Afficher" sur **Aura manquante**.
+* Dans l'onglet **Affichage**, cochez la case **Désaturer** pour rendre l'icône noire et blanche lorsqu'elle est inactive.
+* Ajoutez un effet de **Lueur** (Glow) sous les paramètres d'affichage pour vous assurer que l'alerte de buff manquant attire votre attention.
+
+En utilisant ces méthodes de déclenchement avancées, vos **conquest of azeroth weak auras** vous informeront dynamiquement chaque fois que des buffs personnels critiques expirent.
+
+| Type d'aura | Unité | Type d'aura (Buff/Debuff) | Affichage | Méthode d'identification | Paramètres additionnels |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Barre de vie** | Joueur | N/A | Toujours | Infos unité | Texte de progression centré (`%P`) |
+| **Barre d'énergie** | Joueur | N/A | Toujours | Infos unité (Puissance) | Personnalisation couleur jaune |
+| **Stacks Carnage** | Cible | Débuff | Toujours | ID de sort exact (`802864`) | "Afficher si l'unité n'existe pas" |
+| **Crushing Slam** | Joueur | N/A | Toujours | ID de sort (`501003`) | Affichage cooldown, Inverser activé |
+| **Ancestral Might** | Joueur | Buff | Aura manquante | Nom exact | Désaturer, effet de Lueur activé |
+
+## Foire aux questions
+
+### Où puis-je trouver des conquest of azeroth weak auras pré-faites ?
+Bien que de nombreux joueurs préfèrent construire leurs propres interfaces, vous pouvez trouver des **conquest of azeroth weak auras** partagées par la communauté sur des plateformes comme Wago.io. De nombreux créateurs téléchargent des packs de classes complets spécifiquement adaptés aux classes personnalisées de Project Ascension. Assurez-vous de chercher des packs spécifiant la compatibilité avec WotLK 3.3.5a et WeakAuras 3.0.
+
+### Pourquoi mes ID de sorts personnalisés ne fonctionnent-ils pas dans WeakAuras ?
+Si vos ID de sorts personnalisés ne fonctionnent pas, vous utilisez probablement la version obsolète de WeakAuras 2.0 téléchargée par défaut via le lanceur. Assurez-vous d'avoir installé manuellement la version rétroportée de WeakAuras 3.0 de Bunny67 et vérifiez que vous utilisez l'ID numérique correct fourni par l'addon IDTip.
+
+### Dois-je suivre les buffs personnalisés par leur Nom ou leur ID de sort ?
+Vous devriez toujours suivre les buffs de classe personnalisés en utilisant leur nom exact. Étant donné que les buffs de classe sur Project Ascension changent souvent d'ID de sort lorsque vous apprenez des rangs supérieurs, l'utilisation du nom garantit que votre suivi reste fonctionnel du niveau 1 au niveau 60 sans nécessiter de mises à jour manuelles.
+
+### Comment importer des conquest of azeroth weak auras partagées par d'autres joueurs ?
+Pour importer des **conquest of azeroth weak auras** partagées, copiez la chaîne d'importation (un long bloc de texte) depuis un site communautaire ou un fichier texte. Ouvrez votre menu de configuration en jeu en tapant `/wa`, cliquez sur "Importer" en haut de la fenêtre, collez la chaîne dans la zone de texte et cliquez sur "Importer le groupe".

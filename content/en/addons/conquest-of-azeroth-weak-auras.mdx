@@ -1,0 +1,155 @@
+export const metadata = {
+  title: "Conquest of Azeroth Weak Auras",
+  description: "Master your custom class UI with this complete guide to setting up and customizing Conquest of Azeroth Weak Auras on Project Ascension.",
+  category: "addons",
+  date: "2026-07-03",
+}
+
+Conquest of Azeroth is one of the most ambitious custom class overhauls in World of Warcraft history, but tracking your complex new rotations can be incredibly difficult without the right tools. If you want to optimize your DPS and keep track of custom resources, setting up **conquest of azeroth weak auras** is absolutely essential. In this guide, we will walk you through downloading the correct version of this addon, finding custom spell IDs, and configuring your own **conquest of azeroth weak auras** step-by-step. With 21 completely custom classes and over 60 specs, standard UI elements simply won't cut it. To truly dominate the battlefield, you need a highly responsive and customized interface.
+
+## The Essential Foundation: WeakAuras 3.0 vs. 2.0
+
+World of Warcraft custom servers completely redefine the classic MMORPG gameplay loop. The massive Project Ascension mod, Conquest of Azeroth, introduces 21 completely custom classes and 69 distinct specializations built straight from Warcraft lore. However, to successfully pilot these custom classes, you need a robust user interface. 
+
+According to player experience and community reports, the default addon launcher for Project Ascension often downloads WeakAuras 2.0. While this legacy version is fine for standard Wrath of the Lich King (WotLK) gameplay, it lacks the advanced features, performance optimizations, and script compatibility needed for custom classes. 
+
+To build reliable triggers, you must bypass the standard launcher version and install Bunny67's backported WeakAuras 3.0 fork. Using the proper version ensures that your custom **conquest of azeroth weak auras** do not cause interface lag or script errors during intense raid encounters.
+
+| Feature | WeakAuras 2.0 (Launcher Version) | WeakAuras 3.0 (Bunny67's GitHub Version) |
+| :--- | :--- | :--- |
+| **Performance** | High CPU usage, frequent UI stuttering | Optimized memory handling, smooth frame rates |
+| **Advanced Triggers** | Limited custom code support | Robust custom trigger and sub-element functions |
+| **Sub-Elements** | Basic text and progress tracking | Advanced text anchoring, multiple sub-texts |
+| **Compatibility** | Fails with complex custom server spell IDs | Designed specifically for custom WotLK servers |
+| **UI Customization** | Basic anchoring and sizing options | Pixel-perfect magnetic snapping and alignment |
+
+## Step-by-Step Installation Guide for Conquest of Azeroth
+
+Installing Bunny67's version of WeakAuras requires a manual installation, but the process is highly straightforward. Community reports suggest that many installation issues stem from nested folders. When you download a zip folder from GitHub, it typically extracts into a "master" folder. If you drag this master folder directly into your addons directory, World of Warcraft will not recognize it.
+
+To install the addon correctly, follow these steps:
+
+* Navigate to Bunny67's WeakAuras-WotLK GitHub repository.
+* Click the green "Code" button and select "Download ZIP."
+* Extract the downloaded ZIP file to your desktop.
+* Open the extracted folder; you will see a folder named `WeakAuras-WotLK-master` or similar.
+* Inside this master folder, you will find four critical subfolders: `WeakAuras`, `WeakAurasArchive`, `WeakAurasModelPaths`, and `WeakAurasOptions`.
+* Cut or copy these four subfolders.
+* Paste them directly into your World of Warcraft directory under `Interface\AddOns`.
+
+Once you have placed these folders correctly, you will have the modern framework required to run advanced **conquest of azeroth weak auras** without any compatibility issues.
+
+| Folder Name | Description | Required? |
+| :--- | :--- | :--- |
+| `WeakAuras` | The core engine that processes triggers and loads graphics | **Yes** |
+| `WeakAurasArchive` | Stores historical data and configuration profiles | **Yes** |
+| `WeakAurasModelPaths` | Contains 3D model path definitions for custom visual effects | **Yes** |
+| `WeakAurasOptions` | The in-game configuration menu (accessed via `/wa`) | **Yes** |
+
+## Essential Addons for Custom Spell IDs
+
+Because Conquest of Azeroth features completely custom classes, standard database websites do not have the spell IDs for these custom abilities. Every custom class—whether you are playing a Barbarian, Witch Doctor, Cultist, Necromancer, or Guardian—uses unique, server-side spell IDs. 
+
+To find these IDs, you must install an addon called `IDTip`. This lightweight utility adds the spell ID, item ID, and NPC ID to the bottom of all in-game tooltips. 
+
+To set up IDTip:
+
+* Download IDTip for patch 3.3.5a (WotLK) from a trusted addon database.
+* Extract the folder and place it directly into your `Interface\AddOns` directory.
+* Log into the game and hover over any spell in your spellbook, buff on your buff bar, or debuff on an enemy.
+* Look at the very bottom of the tooltip to find the numerical spell ID.
+
+With IDTip installed, you can effortlessly extract the exact numerical IDs required to program your **conquest of azeroth weak auras** triggers.
+
+| Class | Example Spell / Debuff | Tooltip Spell ID | Trigger Type |
+| :--- | :--- | :--- | :--- |
+| **Barbarian** | Carnage (Debuff) | 802864 | Target Aura (Debuff) |
+| **Barbarian** | Crushing Slam (Ability) | 501003 | Spell Cooldown |
+| **Barbarian** | War Cry (Ability) | 500995 | Spell Cooldown |
+| **Barbarian** | Ancestral Might (Buff) | *Use Name* | Player Aura (Buff) |
+
+## Building Your First Custom Resource Bars
+
+Once your addons are correctly configured, you can begin building your interface. In WeakAuras, you will primarily work with three tabs: **Display**, **Trigger**, and **Load**. The Display tab controls how the aura looks, the Trigger tab dictates when the aura appears, and the Load tab restricts the aura to specific classes or zones.
+
+Let's start by tracking your character's basic health and energy. 
+
+### Creating the Health Bar
+1. Type `/wa` in your chat console to open the WeakAuras dashboard.
+2. Select **New Aura** and choose **Progress Bar**. Name it `HP Bar`.
+3. Navigate to the **Trigger** tab. Change the trigger Type to **Player Unit Info**, set the property to **Health**, and set the unit to **Player**.
+4. Go to the **Display** tab. Scroll down to the sub-elements (Text 1 and Text 2). Remove the `%N` (Name) variable so only the health value is visible.
+5. Under the Anchors section, change the text alignment from automatic to **Center/Center**.
+6. Change the bar color to a vibrant green.
+
+### Creating the Energy Bar
+Instead of building a new bar from scratch, you can save time by duplicating your health bar. Right-click your `HP Bar` in the WeakAuras menu and select **Duplicate**. Rename this duplicate to `Energy Bar`.
+
+1. Go to the **Trigger** tab of the newly created `Energy Bar`.
+2. Change the property from Health to **Power**.
+3. Check the "Power Type" box and select **Energy** (or Mana/Rage, depending on your custom class).
+4. Go to the **Display** tab and change the bar color to a bright yellow.
+
+### Grouping Your Elements
+To keep your user interface organized, you should always place associated elements into a group. Click the "New Group" button at the top of the menu and name it `Class Showcase`. Click the small arrow icon next to your health and energy bars to push them into this group. Grouping is a vital organization step that keeps your **conquest of azeroth weak auras** neat, tidy, and easy to reposition on your screen.
+
+## Tracking Class Mechanics: Carnage Stacks and Cooldowns
+
+Now that your resource bars are configured, it is time to track class-specific mechanics. Let’s use the Barbarian class as an example. When playing a Barbarian, attacking targets generates "Carnage" stacks, which is a custom debuff that significantly increases the damage of your other abilities, such as Crushing Slam. Tracking these stacks is critical to maximizing your rotation.
+
+### Tracking Carnage Stacks (Target Debuff)
+1. Create a **New Aura** and select **Icon**. Set the dimensions to 40x40.
+2. Go to the **Trigger** tab. Set the Type to **Aura**, the Unit to **Target**, and the Aura Type to **Debuff**.
+3. Check the "Exact Spell ID" box and enter `802864` (the custom spell ID for Carnage).
+4. Scroll down and set the trigger to "Show if unit doesn't exist" so the icon remains on your screen even when you do not have an active target.
+5. In the **Display** tab, find the text sub-element (which defaults to `%s` for stacks). Set its anchor to **Center/Center** and increase the font size so you can easily see your stack count.
+
+### Tracking Crushing Slam (Spell Cooldown)
+1. Duplicate your Carnage icon and rename it to `Crushing Slam`.
+2. Go to the **Trigger** tab. Change the Type to **Spell**, and set the property to **Cooldown/Charges/Count**.
+3. Enter the custom spell ID `501003` for Crushing Slam. Change the show setting to **Always**.
+4. In the **Display** tab, check the **Cooldown** box. 
+5. Because we want the icon to show when the ability is ready, check the **Inverse** box. This makes the icon desaturate (turn black and white) while on cooldown and slowly refill as the cooldown completes.
+6. Change the text variable from `%s` (stacks) to `%p` (progress) to display the remaining cooldown timer.
+
+### Tracking War Cry
+To track your other core cooldowns, simply duplicate the `Crushing Slam` icon, rename it to `War Cry`, and change the spell ID in the Trigger tab to `500995`. By duplicating existing elements, you can quickly build a comprehensive suite of **conquest of azeroth weak auras** for any of the 21 custom classes.
+
+## Advanced Buff Tracking for Custom Classes
+
+For self-buffs like the Barbarian's "Ancestral Might," tracking by spell ID can actually cause issues. On the [Project Ascension official website](https://ascension.gg), developers continuously tune and update custom classes. When you learn a new rank of a custom buff, the server often assigns it a completely new spell ID. 
+
+If you hardcode a spell ID into your buff tracker, the aura will stop working the moment you level up and train a new rank. To prevent this, always track self-buffs using their exact **Name** rather than their spell ID.
+
+To set up a missing buff reminder for Ancestral Might:
+
+* Create a **New Aura** and select **Icon**. Set its size to 20x20 and place it on the side of your main resource bars.
+* In the **Trigger** tab, set the Type to **Aura**, the Unit to **Player**, and the Aura Type to **Buff**.
+* In the Name field, type `Ancestral Might` exactly as it appears in-game.
+* Set the "Show" option to **Aura Missing**.
+* In the **Display** tab, check the **Desaturate** box to make the icon black and white when inactive.
+* Add a **Glow** effect under the display settings to ensure the missing buff alert catches your eye.
+
+Using these advanced trigger methods, your **conquest of azeroth weak auras** will dynamically notify you whenever critical self-buffs fall off.
+
+| Aura Type | Unit | Aura Type (Buff/Debuff) | Show Setting | Identification Method | Additional Settings |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Health Bar** | Player | N/A | Always | Unit Info | Center-aligned progress text (`%P`) |
+| **Energy Bar** | Player | N/A | Always | Unit Info (Power) | Yellow color customization |
+| **Carnage Stacks** | Target | Debuff | Always | Exact Spell ID (`802864`) | "Show if unit doesn't exist" enabled |
+| **Crushing Slam** | Player | N/A | Always | Spell ID (`501003`) | Cooldown display, Inverse enabled |
+| **Ancestral Might** | Player | Buff | Aura Missing | Exact Name | Desaturate, Glow effect enabled |
+
+## Frequently Asked Questions
+
+### Where can I find pre-made conquest of azeroth weak auras?
+While many players prefer to build their own custom user interfaces, you can find pre-made **conquest of azeroth weak auras** shared by the community on platforms like Wago.io. Many creators upload complete class packs specifically tailored for the custom classes on Project Ascension. Be sure to look for packs that specify compatibility with WotLK 3.3.5a and WeakAuras 3.0.
+
+### Why are my custom spell IDs not working in WeakAuras?
+If your custom spell IDs are not working, you are likely running the outdated WeakAuras 2.0 version downloaded by default from the launcher. Ensure you have manually installed Bunny67's backported version of WeakAuras 3.0, and verify that you are using the correct numerical ID provided by the IDTip addon.
+
+### Should I track custom buffs using their Name or Spell ID?
+You should always track custom class buffs using their exact name. Because custom class buffs on Project Ascension often change their spell IDs as you train higher ranks, using the name ensures that your tracking remains fully functional from level 1 to level 60 without needing manual updates.
+
+### How do I import conquest of azeroth weak auras shared by other players?
+To import shared **conquest of azeroth weak auras**, copy the import string (a long block of text) from a community website or text file. Open your in-game configuration menu by typing `/wa`, click on "Import" at the top of the window, paste the string into the text box, and click "Import Group."

@@ -1,0 +1,55 @@
+# 部分 1：基础配置
+
+{{REQUIREMENTS_DIR}} = ./doc
+{{PROJECT_PATH}} = ./
+{{DOMAIN}} = conquest-of-azeroth-1.wiki
+{{GAME_NAME}} = conquest of azeroth
+{{OLD_GAME_KEYWORD}} = Haze Seas || Anime Vanguards  ||  VV: ULTIMATUM
+
+参考：{{REQUIREMENTS_DIR}}/00基础信息.md 的主题色
+只更新 --nav-theme 和 --nav-theme-light 的值，共 4 行——分别在 `:root` 选择器下（亮色 2 行）和 `.dark` 选择器下（暗色 2 行），两处都要改，容易漏掉 `.dark` 那两行。
+其他 CSS 变量（--primary、--accent、--ring 等）已通过 var(--nav-theme) 自动引用，无需修改。
+更新相关文件：
+{{PROJECT_PATH}}/src/app/globals.css
+
+参考：{{REQUIREMENTS_DIR}}/favicon_io/下的图标
+移动到文件夹：{{PROJECT_PATH}}/public/
+修改manifest.json - 补充完整的 PWA 信息
+
+参考：{{REQUIREMENTS_DIR}}/00基础信息.md里hero图片下载链接或者去官网去下载对应hero图片
+⚠️ 模板自带的 public/images/hero.webp 可能是 0 字节空文件（却被 og:image / 文章后备图引用），必须下载真实图片覆盖，别因为它"已存在"就跳过；改完用 `file` 命令确认是真实 WebP。
+如果首页 Hero / 视频预览区使用 YouTube 缩略图：先试 maxresdefault（官方预告片通常是真实 1280×720 高清），下载后用 `file`/`ls -la` 确认尺寸——若返回 <2KB 的 120×90 占位小图再降级用 hqdefault 或 sddefault
+转换 Hero 图片为 WebP，并同步替换首页 YouTube 模块当前实际显示的默认大图/预览封面
+禁止保留旧游戏的 YouTube 默认封面；最终页面中带播放按钮的视频预览图必须与新游戏主题一致
+如果首页存在宣传视频，视频模块必须紧跟 Hero 区域之后；不要把视频放到 Tools / Updates / FAQ 等更靠后的 section。
+首页视频除了能播放，还必须检查最终页面里的实际展示尺寸；桌面端不要把视频做成明显过窄的小容器。
+收集首页 YouTube 视频时，优先选 gameplay / tutorial / showcase 类视频，不要优先选 codes 聚合、搬运、短时效资讯类视频。
+更新（替代旧的）相关文件：
+{{PROJECT_PATH}}/public/images/hero.webp
+{{PROJECT_PATH}}/src/app/[locale]/HomePageClient.tsx（YouTube video ID 在文件顶部 `YOUTUBE_VIDEO_ID` 常量）
+{{PROJECT_PATH}}/src/components/site.tsx（TrailerButton/TrailerCard 视频预览组件，检查封面图引用）
+
+页面导航栏左上角（site.tsx 的 SiteHeader 组件）：
+使用正确的主题名称，Logo 应该使用新游戏名首字母而不是旧游戏的
+更新 {{PROJECT_PATH}}/src/components/site.tsx
+
+视频预览组件的 alt 文本（site.tsx 的 TrailerCard 组件）：
+把 `alt="Anime Vanguards"` 替换为新游戏名
+更新 {{PROJECT_PATH}}/src/components/site.tsx
+
+## 验证方法
+
+```bash
+# 验证主题色
+grep "nav-theme" {{PROJECT_PATH}}/src/app/globals.css
+
+# 验证无硬编码颜色残留
+grep -rn "bg-red-\|text-red-\|rgba(220,38,38" {{PROJECT_PATH}}/src/
+
+# 验证 favicon 文件
+ls -la {{PROJECT_PATH}}/public/favicon*
+
+# 验证 Hero 图片
+ls -la {{PROJECT_PATH}}/public/images/hero.webp
+file {{PROJECT_PATH}}/public/images/hero.webp
+```

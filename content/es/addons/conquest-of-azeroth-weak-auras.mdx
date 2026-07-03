@@ -1,0 +1,155 @@
+export const metadata = {
+  title: "Weak Auras para Conquest of Azeroth",
+  description: "Domina la interfaz de tu clase personalizada con esta guía completa para configurar y personalizar las Weak Auras de Conquest of Azeroth en Project Ascension.",
+  category: "addons",
+  date: "2026-07-03",
+}
+
+Conquest of Azeroth es una de las remodelaciones de clases personalizadas más ambiciosas en la historia de World of Warcraft, pero rastrear tus nuevas y complejas rotaciones puede ser increíblemente difícil sin las herramientas adecuadas. Si quieres optimizar tu DPS y mantener un seguimiento de los recursos personalizados, configurar **conquest of azeroth weak auras** es absolutamente esencial. En esta guía, te guiaremos paso a paso para descargar la versión correcta de este addon, encontrar IDs de hechizos personalizados y configurar tus propias **conquest of azeroth weak auras**. Con 21 clases completamente personalizadas y más de 60 especializaciones, los elementos estándar de la interfaz simplemente no son suficientes. Para dominar verdaderamente el campo de batalla, necesitas una interfaz altamente receptiva y personalizada.
+
+## La Base Esencial: WeakAuras 3.0 vs. 2.0
+
+Los servidores personalizados de World of Warcraft redefinen por completo el ciclo de juego clásico de los MMORPG. El masivo mod de Project Ascension, Conquest of Azeroth, introduce 21 clases completamente personalizadas y 69 especializaciones distintas construidas directamente a partir del lore de Warcraft. Sin embargo, para pilotar con éxito estas clases personalizadas, necesitas una interfaz de usuario robusta.
+
+Según la experiencia de los jugadores y los informes de la comunidad, el lanzador de addons predeterminado de Project Ascension a menudo descarga WeakAuras 2.0. Si bien esta versión heredada es adecuada para el juego estándar de Wrath of the Lich King (WotLK), carece de las funciones avanzadas, las optimizaciones de rendimiento y la compatibilidad de scripts necesarios para las clases personalizadas.
+
+Para construir activadores (triggers) fiables, debes omitir la versión del lanzador estándar e instalar el fork de WeakAuras 3.0 adaptado por Bunny67. El uso de la versión adecuada garantiza que tus **conquest of azeroth weak auras** personalizadas no causen lag en la interfaz ni errores de script durante encuentros intensos de banda.
+
+| Característica | WeakAuras 2.0 (Versión del Lanzador) | WeakAuras 3.0 (Versión GitHub de Bunny67) |
+| :--- | :--- | :--- |
+| **Rendimiento** | Alto uso de CPU, tirones frecuentes de la interfaz | Manejo de memoria optimizado, FPS fluidos |
+| **Activadores Avanzados** | Soporte limitado para código personalizado | Funciones robustas de activadores y subelementos |
+| **Subelementos** | Seguimiento básico de texto y progreso | Anclaje de texto avanzado, múltiples subtextos |
+| **Compatibilidad** | Falla con IDs de hechizos complejos de servidores | Diseñado específicamente para servidores WotLK |
+| **Personalización de UI** | Opciones básicas de anclaje y tamaño | Ajuste magnético y alineación perfecta por píxeles |
+
+## Guía de Instalación Paso a Paso para Conquest of Azeroth
+
+La instalación de la versión de WeakAuras de Bunny67 requiere una instalación manual, pero el proceso es muy sencillo. Los informes de la comunidad sugieren que muchos problemas de instalación provienen de carpetas anidadas. Cuando descargas una carpeta zip de GitHub, normalmente se extrae en una carpeta "master". Si arrastras esta carpeta master directamente a tu directorio de addons, World of Warcraft no la reconocerá.
+
+Para instalar el addon correctamente, sigue estos pasos:
+
+* Navega al repositorio de GitHub WeakAuras-WotLK de Bunny67.
+* Haz clic en el botón verde "Code" y selecciona "Download ZIP".
+* Extrae el archivo ZIP descargado en tu escritorio.
+* Abre la carpeta extraída; verás una carpeta llamada `WeakAuras-WotLK-master` o similar.
+* Dentro de esta carpeta master, encontrarás cuatro subcarpetas críticas: `WeakAuras`, `WeakAurasArchive`, `WeakAurasModelPaths` y `WeakAurasOptions`.
+* Corta o copia estas cuatro subcarpetas.
+* Pégalas directamente en tu directorio de World of Warcraft bajo `Interface\AddOns`.
+
+Una vez que hayas colocado estas carpetas correctamente, tendrás el marco moderno necesario para ejecutar **conquest of azeroth weak auras** avanzadas sin ningún problema de compatibilidad.
+
+| Nombre de Carpeta | Descripción | ¿Requerido? |
+| :--- | :--- | :--- |
+| `WeakAuras` | El motor principal que procesa activadores y carga gráficos | **Sí** |
+| `WeakAurasArchive` | Almacena datos históricos y perfiles de configuración | **Sí** |
+| `WeakAurasModelPaths` | Contiene definiciones de rutas de modelos 3D para efectos | **Sí** |
+| `WeakAurasOptions` | Menú de configuración en el juego (se accede con `/wa`) | **Sí** |
+
+## Addons Esenciales para IDs de Hechizos Personalizados
+
+Debido a que Conquest of Azeroth presenta clases completamente personalizadas, los sitios web de bases de datos estándar no tienen los IDs de hechizos para estas habilidades. Cada clase personalizada —ya sea que juegues como Bárbaro, Médico Brujo, Cultista, Nigromante o Guardián— utiliza IDs de hechizos únicos del lado del servidor.
+
+Para encontrar estos IDs, debes instalar un addon llamado `IDTip`. Esta utilidad ligera añade el ID del hechizo, el ID del objeto y el ID del NPC en la parte inferior de todas las descripciones emergentes (tooltips) del juego.
+
+Para configurar IDTip:
+
+* Descarga IDTip para el parche 3.3.5a (WotLK) desde una base de datos de addons confiable.
+* Extrae la carpeta y colócala directamente en tu directorio `Interface\AddOns`.
+* Inicia sesión en el juego y pasa el ratón sobre cualquier hechizo en tu libro de hechizos, beneficio en tu barra de buffs o perjuicio en un enemigo.
+* Mira en la parte inferior de la descripción emergente para encontrar el ID numérico del hechizo.
+
+Con IDTip instalado, puedes extraer sin esfuerzo los IDs numéricos exactos necesarios para programar tus activadores de **conquest of azeroth weak auras**.
+
+| Clase | Ejemplo de Hechizo / Perjuicio | ID de Hechizo | Tipo de Activador |
+| :--- | :--- | :--- | :--- |
+| **Bárbaro** | Carnicería (Perjuicio) | 802864 | Aura de Objetivo (Debuff) |
+| **Bárbaro** | Crushing Slam (Habilidad) | 501003 | Cooldown de Hechizo |
+| **Bárbaro** | War Cry (Habilidad) | 500995 | Cooldown de Hechizo |
+| **Bárbaro** | Ancestral Might (Beneficio) | *Usar Nombre* | Aura de Jugador (Buff) |
+
+## Creando tus Primeras Barras de Recursos Personalizadas
+
+Una vez que tus addons estén correctamente configurados, puedes comenzar a construir tu interfaz. En WeakAuras, trabajarás principalmente con tres pestañas: **Mostrar** (Display), **Activador** (Trigger) y **Cargar** (Load). La pestaña Mostrar controla la apariencia de la aura, la pestaña Activador dicta cuándo aparece la aura, y la pestaña Cargar restringe la aura a clases o zonas específicas.
+
+Comencemos rastreando la salud y la energía básicas de tu personaje.
+
+### Creación de la Barra de Salud
+1. Escribe `/wa` en tu consola de chat para abrir el panel de WeakAuras.
+2. Selecciona **Nueva Aura** y elige **Barra de Progreso**. Nómbrala `Barra HP`.
+3. Ve a la pestaña **Activador**. Cambia el Tipo de activador a **Información de la unidad del jugador**, establece la propiedad en **Salud** y la unidad en **Jugador**.
+4. Ve a la pestaña **Mostrar**. Desplázate hacia abajo hasta los subelementos (Texto 1 y Texto 2). Elimina la variable `%N` (Nombre) para que solo sea visible el valor de salud.
+5. En la sección de Anclajes, cambia la alineación del texto de automático a **Centro/Centro**.
+6. Cambia el color de la barra a un verde vibrante.
+
+### Creación de la Barra de Energía
+En lugar de construir una nueva barra desde cero, puedes ahorrar tiempo duplicando tu barra de salud. Haz clic derecho en tu `Barra HP` en el menú de WeakAuras y selecciona **Duplicar**. Renombra este duplicado como `Barra de Energía`.
+
+1. Ve a la pestaña **Activador** de la recién creada `Barra de Energía`.
+2. Cambia la propiedad de Salud a **Poder**.
+3. Marca la casilla "Tipo de Poder" y selecciona **Energía** (o Maná/Ira, según tu clase personalizada).
+4. Ve a la pestaña **Mostrar** y cambia el color de la barra a un amarillo brillante.
+
+### Agrupación de tus Elementos
+Para mantener organizada tu interfaz de usuario, siempre debes colocar los elementos asociados en un grupo. Haz clic en el botón "Nuevo Grupo" en la parte superior del menú y nómbralo `Clase Showcase`. Haz clic en el pequeño icono de flecha junto a tus barras de salud y energía para moverlas a este grupo. La agrupación es un paso vital de organización que mantiene tus **conquest of azeroth weak auras** ordenadas y fáciles de reposicionar en tu pantalla.
+
+## Seguimiento de Mecánicas de Clase: Cargas de Carnicería y Cooldowns
+
+Ahora que tus barras de recursos están configuradas, es hora de rastrear las mecánicas específicas de la clase. Usemos la clase Bárbaro como ejemplo. Al jugar como Bárbaro, atacar a los objetivos genera cargas de "Carnicería", que es un perjuicio personalizado que aumenta significativamente el daño de tus otras habilidades, como Crushing Slam. Rastrear estas cargas es crítico para maximizar tu rotación.
+
+### Seguimiento de Cargas de Carnicería (Debuff de Objetivo)
+1. Crea una **Nueva Aura** y selecciona **Icono**. Establece las dimensiones en 40x40.
+2. Ve a la pestaña **Activador**. Establece el Tipo en **Aura**, la Unidad en **Objetivo** y el Tipo de Aura en **Perjuicio**.
+3. Marca la casilla "ID de Hechizo Exacto" e ingresa `802864` (el ID de hechizo personalizado para Carnicería).
+4. Desplázate hacia abajo y establece el activador en "Mostrar si la unidad no existe" para que el icono permanezca en tu pantalla incluso cuando no tengas un objetivo activo.
+5. En la pestaña **Mostrar**, busca el subelemento de texto (que por defecto es `%s` para acumulaciones). Establece su anclaje en **Centro/Centro** y aumenta el tamaño de la fuente para que puedas ver fácilmente tu recuento de cargas.
+
+### Seguimiento de Crushing Slam (Cooldown de Hechizo)
+1. Duplica tu icono de Carnicería y cámbiale el nombre a `Crushing Slam`.
+2. Ve a la pestaña **Activador**. Cambia el Tipo a **Hechizo** y establece la propiedad en **Enfriamiento/Cargas/Recuento**.
+3. Ingresa el ID de hechizo personalizado `501003` para Crushing Slam. Cambia la configuración de mostrar a **Siempre**.
+4. En la pestaña **Mostrar**, marca la casilla **Cooldown**.
+5. Debido a que queremos que el icono se muestre cuando la habilidad esté lista, marca la casilla **Inverso**. Esto hace que el icono se desature (se vuelva blanco y negro) mientras está en enfriamiento y se rellene lentamente a medida que se completa el cooldown.
+6. Cambia la variable de texto de `%s` (cargas) a `%p` (progreso) para mostrar el temporizador de enfriamiento restante.
+
+### Seguimiento de War Cry
+Para rastrear tus otros enfriamientos principales, simplemente duplica el icono de `Crushing Slam`, cámbiale el nombre a `War Cry` y cambia el ID del hechizo en la pestaña Activador a `500995`. Al duplicar elementos existentes, puedes construir rápidamente un conjunto completo de **conquest of azeroth weak auras** para cualquiera de las 21 clases personalizadas.
+
+## Seguimiento Avanzado de Beneficios para Clases Personalizadas
+
+Para los beneficios propios (self-buffs) como "Ancestral Might" del Bárbaro, el seguimiento por ID de hechizo puede causar problemas. En el [sitio web oficial de Project Ascension](https://ascension.gg), los desarrolladores ajustan y actualizan continuamente las clases personalizadas. Cuando aprendes un nuevo rango de un beneficio personalizado, el servidor a menudo le asigna un ID de hechizo completamente nuevo.
+
+Si codificas un ID de hechizo en tu rastreador de beneficios, el aura dejará de funcionar en el momento en que subas de nivel y entrenes un nuevo rango. Para evitar esto, rastrea siempre los beneficios propios usando su **Nombre** exacto en lugar de su ID de hechizo.
+
+Para configurar un recordatorio de beneficio faltante para Ancestral Might:
+
+* Crea una **Nueva Aura** y selecciona **Icono**. Establece su tamaño en 20x20 y colócalo a un lado de tus barras de recursos principales.
+* En la pestaña **Activador**, establece el Tipo en **Aura**, la Unidad en **Jugador** y el Tipo de Aura en **Beneficio**.
+* En el campo Nombre, escribe `Ancestral Might` exactamente como aparece en el juego.
+* Establece la opción "Mostrar" en **Aura Faltante**.
+* En la pestaña **Mostrar**, marca la casilla **Desaturar** para que el icono sea blanco y negro cuando esté inactivo.
+* Añade un efecto de **Brillo** (Glow) bajo la configuración de pantalla para asegurar que la alerta de beneficio faltante capte tu atención.
+
+Usando estos métodos de activación avanzada, tus **conquest of azeroth weak auras** te notificarán dinámicamente cada vez que se agoten los beneficios propios críticos.
+
+| Tipo de Aura | Unidad | Tipo de Aura (Buff/Debuff) | Mostrar | Método de Identificación | Ajustes Adicionales |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Barra de Salud** | Jugador | N/A | Siempre | Info de Unidad | Texto de progreso centrado (`%P`) |
+| **Barra de Energía** | Jugador | N/A | Siempre | Info (Poder) | Personalización de color amarillo |
+| **Cargas Carnicería**| Objetivo | Perjuicio | Siempre | ID Exacto (`802864`) | "Mostrar si unidad no existe" |
+| **Crushing Slam** | Jugador | N/A | Siempre | ID Hechizo (`501003`) | Cooldown, Inverso habilitado |
+| **Ancestral Might** | Jugador | Beneficio | Aura Faltante | Nombre Exacto | Desaturar, efecto de Brillo |
+
+## Preguntas Frecuentes
+
+### ¿Dónde puedo encontrar weak auras para conquest of azeroth ya hechas?
+Aunque muchos jugadores prefieren construir sus propias interfaces personalizadas, puedes encontrar **conquest of azeroth weak auras** compartidas por la comunidad en plataformas como Wago.io. Muchos creadores suben paquetes de clases completos adaptados específicamente para las clases personalizadas de Project Ascension. Asegúrate de buscar paquetes que especifiquen compatibilidad con WotLK 3.3.5a y WeakAuras 3.0.
+
+### ¿Por qué mis IDs de hechizos personalizados no funcionan en WeakAuras?
+Si tus IDs de hechizos personalizados no funcionan, es probable que estés ejecutando la versión obsoleta de WeakAuras 2.0 descargada por defecto desde el lanzador. Asegúrate de haber instalado manualmente la versión adaptada de WeakAuras 3.0 de Bunny67 y verifica que estás usando el ID numérico correcto proporcionado por el addon IDTip.
+
+### ¿Debo rastrear los beneficios personalizados usando su Nombre o su ID de hechizo?
+Siempre debes rastrear los beneficios de clases personalizadas usando su nombre exacto. Debido a que los beneficios de clases en Project Ascension a menudo cambian sus IDs de hechizo a medida que entrenas rangos superiores, el uso del nombre garantiza que tu seguimiento siga siendo plenamente funcional desde el nivel 1 hasta el nivel 60 sin necesidad de actualizaciones manuales.
+
+### ¿Cómo importo weak auras compartidas por otros jugadores?
+Para importar **conquest of azeroth weak auras** compartidas, copia la cadena de importación (un bloque largo de texto) de un sitio web de la comunidad o archivo de texto. Abre tu menú de configuración en el juego escribiendo `/wa`, haz clic en "Importar" en la parte superior de la ventana, pega la cadena en el cuadro de texto y haz clic en "Importar Grupo".

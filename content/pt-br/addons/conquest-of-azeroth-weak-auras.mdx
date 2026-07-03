@@ -1,0 +1,155 @@
+export const metadata = {
+  title: "Weak Auras para Conquest of Azeroth",
+  description: "Domine a interface da sua classe personalizada com este guia completo para configurar e personalizar Weak Auras de Conquest of Azeroth no Project Ascension.",
+  category: "addons",
+  date: "2026-07-03",
+}
+
+Conquest of Azeroth é uma das reformulações de classes personalizadas mais ambiciosas da história do World of Warcraft, mas rastrear suas novas e complexas rotações pode ser incrivelmente difícil sem as ferramentas certas. Se você deseja otimizar seu DPS e acompanhar recursos personalizados, configurar **weak auras para conquest of azeroth** é absolutamente essencial. Neste guia, vamos orientá-lo passo a passo no download da versão correta deste addon, na busca de IDs de feitiços personalizados e na configuração de suas próprias **weak auras para conquest of azeroth**. Com 21 classes completamente customizadas e mais de 60 especializações, os elementos padrão da interface de usuário simplesmente não serão suficientes. Para dominar verdadeiramente o campo de batalha, você precisa de uma interface altamente responsiva e personalizada.
+
+## A Base Essencial: WeakAuras 3.0 vs. 2.0
+
+Os servidores personalizados de World of Warcraft redefinem completamente o ciclo de jogabilidade clássico do MMORPG. O massivo mod Project Ascension, Conquest of Azeroth, introduz 21 classes totalmente personalizadas e 69 especializações distintas construídas diretamente a partir do folclore de Warcraft. No entanto, para pilotar essas classes com sucesso, você precisa de uma interface de usuário robusta.
+
+De acordo com a experiência dos jogadores e relatos da comunidade, o instalador padrão de addons do Project Ascension geralmente baixa o WeakAuras 2.0. Embora esta versão legada seja adequada para a jogabilidade padrão do Wrath of the Lich King (WotLK), ela carece dos recursos avançados, otimizações de desempenho e compatibilidade de scripts necessários para as classes personalizadas.
+
+Para construir gatilhos (triggers) confiáveis, você deve ignorar a versão do instalador padrão e instalar o fork do WeakAuras 3.0 adaptado pelo Bunny67. O uso da versão adequada garante que suas **weak auras para conquest of azeroth** personalizadas não causem lentidão na interface ou erros de script durante encontros intensos em raides.
+
+| Recurso | WeakAuras 2.0 (Versão do Launcher) | WeakAuras 3.0 (Versão GitHub do Bunny67) |
+| :--- | :--- | :--- |
+| **Desempenho** | Alto uso de CPU, travamentos frequentes na UI | Manipulação de memória otimizada, taxas de quadros fluidas |
+| **Gatilhos Avançados** | Suporte limitado a código personalizado | Funções robustas de gatilhos personalizados e subelementos |
+| **Subelementos** | Rastreamento básico de texto e progresso | Ancoragem de texto avançada, múltiplos subtextos |
+| **Compatibilidade** | Falha com IDs de feitiços complexos de servidores custom | Projetado especificamente para servidores WotLK customizados |
+| **Customização de UI** | Opções básicas de ancoragem e redimensionamento | Ajuste magnético e alinhamento com precisão de pixel |
+
+## Guia de Instalação Passo a Passo para Conquest of Azeroth
+
+A instalação da versão do WeakAuras do Bunny67 requer uma instalação manual, mas o processo é muito simples. Relatos da comunidade sugerem que muitos problemas de instalação surgem de pastas aninhadas. Quando você baixa uma pasta zip do GitHub, ela normalmente é extraída em uma pasta "master". Se você arrastar essa pasta master diretamente para o diretório de addons, o World of Warcraft não a reconhecerá.
+
+Para instalar o addon corretamente, siga estas etapas:
+
+* Navegue até o repositório WeakAuras-WotLK do Bunny67 no GitHub.
+* Clique no botão verde "Code" e selecione "Download ZIP".
+* Extraia o arquivo ZIP baixado para sua área de trabalho.
+* Abra a pasta extraída; você verá uma pasta chamada `WeakAuras-WotLK-master` ou similar.
+* Dentro desta pasta master, você encontrará quatro subpastas críticas: `WeakAuras`, `WeakAurasArchive`, `WeakAurasModelPaths` e `WeakAurasOptions`.
+* Recorte ou copie essas quatro subpastas.
+* Cole-as diretamente no seu diretório do World of Warcraft em `Interface\AddOns`.
+
+Depois de colocar essas pastas corretamente, você terá a estrutura moderna necessária para executar **weak auras para conquest of azeroth** avançadas sem problemas de compatibilidade.
+
+| Nome da Pasta | Descrição | Obrigatório? |
+| :--- | :--- | :--- |
+| `WeakAuras` | O motor principal que processa gatilhos e carrega gráficos | **Sim** |
+| `WeakAurasArchive` | Armazena dados históricos e perfis de configuração | **Sim** |
+| `WeakAurasModelPaths` | Contém definições de caminhos de modelos 3D para efeitos visuais | **Sim** |
+| `WeakAurasOptions` | O menu de configuração no jogo (acessado via `/wa`) | **Sim** |
+
+## Addons Essenciais para IDs de Feitiços Personalizados
+
+Como o Conquest of Azeroth apresenta classes totalmente customizadas, os sites de banco de dados padrão não possuem os IDs de feitiços para essas habilidades. Cada classe personalizada — seja você um Bárbaro, Feiticeiro (Witch Doctor), Cultista, Necromante ou Guardião — usa IDs de feitiços exclusivos do lado do servidor.
+
+Para encontrar esses IDs, você deve instalar um addon chamado `IDTip`. Este utilitário leve adiciona o ID do feitiço, ID do item e ID do NPC na parte inferior de todas as dicas de ferramentas (tooltips) do jogo.
+
+Para configurar o IDTip:
+
+* Baixe o IDTip para o patch 3.3.5a (WotLK) de um banco de dados de addons confiável.
+* Extraia a pasta e coloque-a diretamente no seu diretório `Interface\AddOns`.
+* Entre no jogo e passe o mouse sobre qualquer feitiço em seu livro de feitiços, bônus (buff) em sua barra de bônus ou penalidade (debuff) em um inimigo.
+* Olhe para a parte inferior da dica de ferramenta para encontrar o ID numérico do feitiço.
+
+Com o IDTip instalado, você pode extrair sem esforço os IDs numéricos exatos necessários para programar os gatilhos de suas **weak auras para conquest of azeroth**.
+
+| Classe | Exemplo de Feitiço / Debuff | ID do Feitiço na Tooltip | Tipo de Gatilho |
+| :--- | :--- | :--- | :--- |
+| **Bárbaro** | Carnificina (Debuff) | 802864 | Aura do Alvo (Debuff) |
+| **Bárbaro** | Golpe Esmagador (Habilidade) | 501003 | Cooldown de Feitiço |
+| **Bárbaro** | Grito de Guerra (Habilidade) | 500995 | Cooldown de Feitiço |
+| **Bárbaro** | Poder Ancestral (Buff) | *Usar Nome* | Aura do Jogador (Buff) |
+
+## Construindo Suas Primeiras Barras de Recursos Personalizadas
+
+Assim que seus addons estiverem configurados corretamente, você poderá começar a construir sua interface. No WeakAuras, você trabalhará principalmente com três abas: **Exibição (Display)**, **Gatilho (Trigger)** e **Carregar (Load)**. A aba Exibição controla a aparência da aura, a aba Gatilho dita quando a aura aparece e a aba Carregar restringe a aura a classes ou zonas específicas.
+
+Vamos começar rastreando a vida (HP) e a energia básica do seu personagem.
+
+### Criando a Barra de Vida
+1. Digite `/wa` no console do chat para abrir o painel do WeakAuras.
+2. Selecione **Nova Aura** e escolha **Barra de Progresso**. Nomeie-a como `Barra de HP`.
+3. Navegue até a aba **Gatilho**. Altere o tipo de gatilho para **Informações da Unidade do Jogador**, defina a propriedade como **Vida** e a unidade como **Jogador**.
+4. Vá para a aba **Exibição**. Role para baixo até os subelementos (Texto 1 e Texto 2). Remova a variável `%N` (Nome) para que apenas o valor da vida fique visível.
+5. Na seção de Âncoras, altere o alinhamento do texto de automático para **Centro/Centro**.
+6. Altere a cor da barra para um verde vibrante.
+
+### Criando a Barra de Energia
+Em vez de construir uma nova barra do zero, você pode economizar tempo duplicando sua barra de vida. Clique com o botão direito na sua `Barra de HP` no menu do WeakAuras e selecione **Duplicar**. Renomeie esta duplicata para `Barra de Energia`.
+
+1. Vá para a aba **Gatilho** da recém-criada `Barra de Energia`.
+2. Altere a propriedade de Vida para **Poder**.
+3. Marque a caixa "Tipo de Poder" e selecione **Energia** (ou Mana/Raiva, dependendo da sua classe personalizada).
+4. Vá para a aba **Exibição** e altere a cor da barra para um amarelo brilhante.
+
+### Agrupando Seus Elementos
+Para manter sua interface organizada, você deve sempre colocar elementos associados em um grupo. Clique no botão "Novo Grupo" no topo do menu e nomeie-o como `Apresentação de Classe`. Clique no pequeno ícone de seta ao lado de suas barras de vida e energia para movê-las para este grupo. O agrupamento é uma etapa vital de organização que mantém suas **weak auras para conquest of azeroth** limpas, arrumadas e fáceis de reposicionar na tela.
+
+## Rastreando Mecânicas de Classe: Acúmulos de Carnificina e Cooldowns
+
+Agora que suas barras de recursos estão configuradas, é hora de rastrear as mecânicas específicas da classe. Vamos usar a classe Bárbaro como exemplo. Ao jogar como Bárbaro, atacar alvos gera acúmulos de "Carnificina", que é um debuff personalizado que aumenta significativamente o dano de suas outras habilidades, como o Golpe Esmagador. Rastrear esses acúmulos é fundamental para maximizar sua rotação.
+
+### Rastreando Acúmulos de Carnificina (Debuff no Alvo)
+1. Crie uma **Nova Aura** e selecione **Ícone**. Defina as dimensões para 40x40.
+2. Vá para a aba **Gatilho**. Defina o Tipo como **Aura**, a Unidade como **Alvo** e o Tipo de Aura como **Debuff**.
+3. Marque a caixa "ID de Feitiço Exato" e insira `802864` (o ID do feitiço personalizado para Carnificina).
+4. Role para baixo e defina o gatilho para "Mostrar se a unidade não existir" para que o ícone permaneça na tela mesmo quando você não tiver um alvo ativo.
+5. Na aba **Exibição**, encontre o subelemento de texto (que por padrão é `%s` para acúmulos). Defina sua âncora como **Centro/Centro** e aumente o tamanho da fonte para que você possa ver facilmente a contagem de acúmulos.
+
+### Rastreando Golpe Esmagador (Cooldown de Feitiço)
+1. Duplique seu ícone de Carnificina e renomeie-o para `Golpe Esmagador`.
+2. Vá para a aba **Gatilho**. Altere o Tipo para **Feitiço** e defina a propriedade como **Cooldown/Cargas/Contagem**.
+3. Insira o ID do feitiço personalizado `501003` para Golpe Esmagador. Altere a configuração de exibição para **Sempre**.
+4. Na aba **Exibição**, marque a caixa **Cooldown**.
+5. Como queremos que o ícone apareça quando a habilidade estiver pronta, marque a caixa **Inverso**. Isso faz com que o ícone perca a saturação (fique em preto e branco) enquanto estiver em cooldown e se preencha lentamente conforme o cooldown termina.
+6. Altere a variável de texto de `%s` (acúmulos) para `%p` (progresso) para exibir o cronômetro de cooldown restante.
+
+### Rastreando Grito de Guerra
+Para rastrear seus outros cooldowns principais, basta duplicar o ícone do `Golpe Esmagador`, renomeá-lo para `Grito de Guerra` e alterar o ID do feitiço na aba Gatilho para `500995`. Ao duplicar elementos existentes, você pode construir rapidamente um conjunto abrangente de **weak auras para conquest of azeroth** para qualquer uma das 21 classes personalizadas.
+
+## Rastreamento Avançado de Buffs para Classes Personalizadas
+
+Para bônus próprios (self-buffs) como o "Poder Ancestral" do Bárbaro, o rastreamento por ID de feitiço pode causar problemas. No [site oficial do Project Ascension](https://ascension.gg), os desenvolvedores ajustam e atualizam continuamente as classes personalizadas. Quando você aprende um novo ranque de um bônus personalizado, o servidor frequentemente atribui a ele um ID de feitiço completamente novo.
+
+Se você codificar rigidamente um ID de feitiço no seu rastreador de buffs, a aura parará de funcionar no momento em que você subir de nível e treinar um novo ranque. Para evitar isso, sempre rastreie buffs próprios usando seu **Nome** exato em vez do ID do feitiço.
+
+Para configurar um lembrete de buff ausente para Poder Ancestral:
+
+* Crie uma **Nova Aura** e selecione **Ícone**. Defina seu tamanho como 20x20 e coloque-o ao lado de suas barras de recursos principais.
+* Na aba **Gatilho**, defina o Tipo como **Aura**, a Unidade como **Jogador** e o Tipo de Aura como **Buff**.
+* No campo Nome, digite `Poder Ancestral` exatamente como aparece no jogo.
+* Defina a opção "Mostrar" como **Aura Ausente**.
+* Na aba **Exibição**, marque a caixa **Desaturar** para tornar o ícone preto e branco quando inativo.
+* Adicione um efeito de **Brilho (Glow)** nas configurações de exibição para garantir que o alerta de buff ausente chame sua atenção.
+
+Usando esses métodos de gatilho avançados, suas **weak auras para conquest of azeroth** notificarão você dinamicamente sempre que buffs críticos expirarem.
+
+| Tipo de Aura | Unidade | Tipo de Aura (Buff/Debuff) | Configuração de Exibição | Método de Identificação | Configurações Adicionais |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Barra de Vida** | Jogador | N/A | Sempre | Info da Unidade | Texto de progresso centralizado (`%P`) |
+| **Barra de Energia** | Jogador | N/A | Sempre | Info da Unidade (Poder) | Customização de cor amarela |
+| **Stacks de Carnificina** | Alvo | Debuff | Sempre | ID de Feitiço Exato (`802864`) | "Mostrar se a unidade não existir" ativado |
+| **Golpe Esmagador** | Jogador | N/A | Sempre | ID de Feitiço (`501003`) | Exibição de Cooldown, Inverso ativado |
+| **Poder Ancestral** | Jogador | Buff | Aura Ausente | Nome Exato | Desaturar, efeito de Brilho ativado |
+
+## Perguntas Frequentes
+
+### Onde posso encontrar weak auras para conquest of azeroth pré-fabricadas?
+Embora muitos jogadores prefiram construir suas próprias interfaces de usuário personalizadas, você pode encontrar **weak auras para conquest of azeroth** pré-fabricadas compartilhadas pela comunidade em plataformas como Wago.io. Muitos criadores fazem upload de pacotes completos de classes especificamente adaptados para as classes personalizadas do Project Ascension. Certifique-se de procurar pacotes que especifiquem compatibilidade com WotLK 3.3.5a e WeakAuras 3.0.
+
+### Por que meus IDs de feitiços personalizados não estão funcionando no WeakAuras?
+Se seus IDs de feitiços personalizados não estiverem funcionando, é provável que você esteja executando a versão desatualizada do WeakAuras 2.0 baixada por padrão pelo launcher. Certifique-se de ter instalado manualmente a versão backported do WeakAuras 3.0 do Bunny67 e verifique se está usando o ID numérico correto fornecido pelo addon IDTip.
+
+### Devo rastrear buffs personalizados usando seu Nome ou ID de Feitiço?
+Você deve sempre rastrear buffs de classes personalizadas usando seu nome exato. Como os buffs de classes personalizadas no Project Ascension frequentemente mudam seus IDs de feitiço conforme você treina ranques mais altos, o uso do nome garante que seu rastreamento permaneça totalmente funcional do nível 1 ao nível 60 sem a necessidade de atualizações manuais.
+
+### Como faço para importar weak auras para conquest of azeroth compartilhadas por outros jogadores?
+Para importar **weak auras para conquest of azeroth** compartilhadas, copie a string de importação (um longo bloco de texto) de um site da comunidade ou arquivo de texto. Abra seu menu de configuração no jogo digitando `/wa`, clique em "Importar" no topo da janela, cole a string na caixa de texto e clique em "Importar Grupo".
