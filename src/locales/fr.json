@@ -1,1 +1,561 @@
-{}
+{
+  "site": {
+    "name": "Wiki Conquest of Azeroth",
+    "shortName": "Conquest of Azeroth",
+    "tagline": "Wiki communautaire indépendante créée par des fans",
+    "description": "Royaume MMORPG Classic+ gratuit avec 21 classes originales, 69 spécialisations, plus de 1000 sorts et talents, et un niveau maximum de 60.",
+    "legalNotice": "Wiki Conquest of Azeroth est un site indépendant créé par des fans. Il n'est pas affilié à Project Ascension, Blizzard Entertainment ni à l'équipe officielle de World of Warcraft."
+  },
+  "nav": {
+    "guide": "Guide",
+    "release": "Sortie",
+    "access": "Accès",
+    "classes": "Classes",
+    "builds": "Builds",
+    "rankings": "Classements",
+    "addons": "Addons",
+    "community": "Communauté"
+  },
+  "home": {
+    "meta": {
+      "title": "Wiki Conquest of Azeroth - Classes, builds et guides",
+      "description": "Explorez les classes, spécialisations, builds, parcours de leveling, talents, donjons, raids, PvP et conseils débutants de Conquest of Azeroth dans un wiki créé par des fans."
+    },
+    "hero": {
+      "eyebrow": "Wiki communautaire indépendante créée par des fans",
+      "title": "Wiki Conquest of Azeroth",
+      "description": "Redécouvrez Azeroth classique avec 21 classes originales ancrées dans le lore, 69 spécialisations et de profonds arbres de doubles talents. Montez jusqu'au niveau 60, maîtrisez des builds personnalisés et affrontez du contenu mondial étendu, des donjons Mythic+, des raids, des arènes et du PvP à haut risque.",
+      "stats": [
+        "Sortie complète 3 juil. 2026",
+        "Mis à jour juil. 2026",
+        "21 classes originales",
+        "69 spécialisations uniques",
+        "1000+ sorts et talents",
+        "Niveau max 60"
+      ],
+      "primaryCta": "Télécharger pour PC / Windows",
+      "secondaryCta": "Rejoindre le Discord officiel",
+      "tertiaryCta": "Voir le YouTube officiel",
+      "videoLabel": "Bande-annonce officielle de sortie",
+      "closeVideo": "Fermer la vidéo"
+    },
+    "updates": {
+      "title": "Dernières mises à jour",
+      "browse": "Parcourir tous les guides",
+      "viewAll": "Tout voir"
+    },
+    "start": {
+      "eyebrow": "Commencez ici",
+      "title": "Votre aventure Conquest of Azeroth",
+      "cards": [
+        {
+          "number": "1",
+          "title": "Guide débutant",
+          "description": "Apprenez à créer un compte, installer le launcher, sélectionner le royaume Conquest of Azeroth, configurer votre interface et terminer vos premières quêtes."
+        },
+        {
+          "number": "2",
+          "title": "Guide de choix de classe",
+          "description": "Comparez les 21 classes originales selon le rôle de combat, la difficulté, les performances solo, l'utilité de groupe, le potentiel PvE et le style PvP."
+        },
+        {
+          "number": "3",
+          "title": "Guide de leveling et d'équipement",
+          "description": "Suivez des parcours pratiques du niveau 1 au 60, comprenez la progression des talents, trouvez de l'équipement utile et préparez votre personnage aux donjons."
+        },
+        {
+          "number": "4",
+          "title": "Guide endgame et builds",
+          "description": "Préparez des builds optimisés pour les donjons Mythic+, raids, arènes, boss mondiaux, Manastorm et activités Hybrid Risk."
+        }
+      ]
+    },
+    "popular": {
+      "eyebrow": "Pages populaires",
+      "title": "Tendances du moment",
+      "quickLinks": [
+        "Guide",
+        "Builds",
+        "Classes",
+        "Classements"
+      ],
+      "cards": [
+        {
+          "badge": "Débutant",
+          "title": "Guide débutant Conquest of Azeroth",
+          "description": "Commencez Conquest of Azeroth avec la création de compte, l'installation du launcher, le choix du royaume, la sélection de classe et les premiers objectifs de quête.",
+          "href": "/guide"
+        },
+        {
+          "badge": "Accès",
+          "title": "Comment jouer à Conquest of Azeroth",
+          "description": "Trouvez de l'aide sur le launcher, le PTR, le free-to-play et la configuration avant d'entrer dans le royaume Conquest of Azeroth.",
+          "href": "/access"
+        },
+        {
+          "badge": "Populaire",
+          "title": "Tier list des classes Conquest of Azeroth",
+          "description": "Comparez les classes selon le confort débutant, la valeur en groupe, les performances PvE, la pression PvP et la complexité de build.",
+          "href": "/rankings"
+        },
+        {
+          "badge": "Populaire",
+          "title": "Classes et spécialisations",
+          "description": "Passez en revue 21 classes originales, 69 spécialisations, ressources personnalisées et mécaniques de rôle avant de choisir un main.",
+          "href": "/classes"
+        },
+        {
+          "badge": "Nouveau",
+          "title": "Parcours de leveling",
+          "description": "Planifiez un trajet pratique du niveau 1 au 60 avec rythme de quêtes, préparation aux donjons, progression des talents et paliers d'équipement.",
+          "href": "/guide"
+        },
+        {
+          "badge": "Populaire",
+          "title": "Talents et builds",
+          "description": "Construisez autour des arbres de classe, arbres de spécialisation, ressources personnalisées, rôles PvE et fenêtres de pression PvP.",
+          "href": "/builds"
+        },
+        {
+          "badge": "Populaire",
+          "title": "Donjons et raids",
+          "description": "Préparez-vous aux routes de donjon, au scaling Mythic+, aux raids multi-difficultés, aux boss mondiaux et aux rôles de groupe au niveau 60.",
+          "href": "/guide"
+        },
+        {
+          "badge": "Nouveau",
+          "title": "PvP et Hybrid Risk",
+          "description": "Découvrez comment les arènes, choix à haut risque, zones personnalisées et changements de build façonnent l'endgame de Conquest of Azeroth.",
+          "href": "/rankings"
+        },
+        {
+          "badge": "Nouveau",
+          "title": "Actualités de sortie",
+          "description": "Suivez la bêta, la bêta ouverte, le stress test, la date de sortie et la couverture de la sortie complète de Conquest of Azeroth.",
+          "href": "/release"
+        }
+      ]
+    },
+    "aboutGame": {
+      "title": "Qu'est-ce que Conquest of Azeroth ?",
+      "paragraphs": [
+        "Conquest of Azeroth est un royaume MMORPG Classic+ personnalisé et free-to-play au sein de Project Ascension. Il réinvente Azeroth Vanilla avec 21 classes originales inspirées du lore, des ressources personnalisées, de nouveaux visuels de sorts, des mécaniques uniques et des arbres de talents très configurables.",
+        "Les joueurs choisissent une spécialisation au niveau 10, développent leur personnage via des arbres séparés de classe et de spécialisation, puis progressent vers le niveau 60. L'endgame comprend des donjons étendus, Mythic+, des raids multi-difficultés, des arènes, des boss mondiaux, des zones personnalisées et du PvP optionnel à haut risque."
+      ],
+      "stats": [
+        {
+          "label": "Développeur",
+          "value": "Project Ascension"
+        },
+        {
+          "label": "Plateforme",
+          "value": "PC / Windows"
+        },
+        {
+          "label": "Genre",
+          "value": "MMORPG Classic+"
+        },
+        {
+          "label": "Sortie complète",
+          "value": "3 juil. 2026"
+        },
+        {
+          "label": "Classes originales",
+          "value": "21"
+        },
+        {
+          "label": "Spécialisations",
+          "value": "69"
+        },
+        {
+          "label": "Sorts et talents",
+          "value": "1000+"
+        },
+        {
+          "label": "Niveau maximum",
+          "value": "60"
+        }
+      ],
+      "cta": "Explorer tous les guides"
+    },
+    "explore": {
+      "title": "Explorer les guides Conquest of Azeroth",
+      "description": "Accédez aux guides Conquest of Azeroth, notes de sortie, aide d'accès, classes, builds, classements, addons et ressources communautaires.",
+      "readFullGuide": "Lire le guide complet",
+      "tierLabel": "Tier {tier}",
+      "modules": [
+        {
+          "order": 1,
+          "name": "Accès à Conquest of Azeroth",
+          "description": "Commencez par la configuration du compte, l'installation du launcher, le choix du royaume, les notes de téléchargement PTR et les bases de l'accès free-to-play.",
+          "href": "/access",
+          "displayType": "step-by-step",
+          "highlights": [
+            {
+              "label": "1",
+              "detail": "Créez ou confirmez votre compte Ascension avant d'installer le launcher."
+            },
+            {
+              "label": "2",
+              "detail": "Téléchargez le launcher PC et sélectionnez le royaume Conquest of Azeroth."
+            },
+            {
+              "label": "3",
+              "detail": "Consultez les notes PTR et free-to-play avant de choisir votre premier personnage."
+            }
+          ]
+        },
+        {
+          "order": 2,
+          "name": "Guide débutant Conquest of Azeroth",
+          "description": "Commencez Conquest of Azeroth avec la création de compte, l'installation du launcher, le choix du royaume, la classe, les premières quêtes, l'interface et les premières décisions de talents.",
+          "href": "/guide",
+          "displayType": "step-by-step",
+          "highlights": [
+            {
+              "label": "1",
+              "detail": "Créez un compte Ascension, installez le launcher et choisissez le royaume Conquest of Azeroth depuis le client."
+            },
+            {
+              "label": "2",
+              "detail": "Choisissez une classe après avoir examiné son rôle de combat, son flux de ressources, sa difficulté et ses outils solo."
+            },
+            {
+              "label": "3",
+              "detail": "Atteignez le niveau 10, choisissez une spécialisation et commencez à dépenser des points dans les arbres de classe et de spécialisation."
+            },
+            {
+              "label": "4",
+              "detail": "Suivez des quêtes et donjons adaptés à votre niveau tout en remplaçant l'équipement faible par des pièces utiles."
+            },
+            {
+              "label": "5",
+              "detail": "Préparez le niveau 60 en sauvegardant des notes de build, en apprenant les mécaniques de donjon et en choisissant une orientation PvE ou PvP."
+            }
+          ]
+        },
+        {
+          "order": 3,
+          "name": "Tier list des classes Conquest of Azeroth",
+          "description": "Comparez les classes Conquest of Azeroth selon le confort débutant, la demande en groupe, la valeur de dégâts ou soins PvE, l'utilité de tank, la pression PvP et la complexité de build.",
+          "href": "/rankings",
+          "displayType": "tier-grid",
+          "highlights": [
+            {
+              "label": "S",
+              "detail": "Leveling fluide, forte utilité en donjon et progression de talents claire pour un premier personnage."
+            },
+            {
+              "label": "A",
+              "detail": "Forte valeur de groupe avec quelques décisions de build à apprendre avant les raids, Mythic+ ou arènes."
+            },
+            {
+              "label": "B",
+              "detail": "Choix gratifiants qui deviennent plus fluides avec l'équipement, la connaissance des donjons ou une rotation mieux planifiée."
+            },
+            {
+              "label": "C",
+              "detail": "Builds de niche PvP ou propres à certains combats qui demandent une préparation soignée pour être constants."
+            }
+          ]
+        },
+        {
+          "order": 4,
+          "name": "Classes et spécialisations Conquest of Azeroth",
+          "description": "Explorez les 21 classes originales et 69 spécialisations qui définissent Conquest of Azeroth, avec ressources personnalisées, visuels de sorts, choix de spécialisation au niveau 10 et mécaniques de rôle.",
+          "href": "/classes",
+          "displayType": "card-list",
+          "highlights": [
+            {
+              "label": "21 classes",
+              "detail": "Choisissez parmi 21 classes originales inspirées du lore et pensées pour les rôles, ressources et styles de combat d'Azeroth classique."
+            },
+            {
+              "label": "69 specs",
+              "detail": "Au niveau 10, chaque personnage choisit une spécialisation qui transforme talents, options de rôle et identité de combat."
+            },
+            {
+              "label": "Ressources",
+              "detail": "Les ressources de classe personnalisées et les visuels de sorts donnent à chaque classe une identité distincte des rôles classiques."
+            },
+            {
+              "label": "Doubles arbres",
+              "detail": "Les arbres de classe et de spécialisation fonctionnent ensemble, donnant à chaque build une voie claire de leveling et d'endgame."
+            }
+          ]
+        },
+        {
+          "order": 5,
+          "name": "Leveling et équipement Conquest of Azeroth",
+          "description": "Planifiez la progression Conquest of Azeroth du niveau 1 au 60 avec routes de quêtes, préparation aux donjons, rythme des talents, améliorations d'équipement et préparation endgame.",
+          "href": "/guide",
+          "displayType": "step-by-step",
+          "highlights": [
+            {
+              "label": "1",
+              "detail": "Commencez par une classe dont le système de ressources et le rôle correspondent à votre rythme solo ou groupe préféré."
+            },
+            {
+              "label": "2",
+              "detail": "Parcourez les zones familières d'Azeroth classique en utilisant vos outils de classe personnalisés pour lisser les faiblesses."
+            },
+            {
+              "label": "3",
+              "detail": "Dépensez régulièrement les points de talent, car les premiers passifs façonnent dégâts, soins, mitigation et flux de ressources."
+            },
+            {
+              "label": "4",
+              "detail": "Remplacez armes, armures et bijoux obsolètes avant d'entrer dans du contenu de donjon plus difficile."
+            },
+            {
+              "label": "5",
+              "detail": "Au niveau 60, préparez des ensembles PvE et PvP séparés pour donjons, raids, arènes ou Hybrid Risk."
+            }
+          ]
+        },
+        {
+          "order": 6,
+          "name": "Talents et builds Conquest of Azeroth",
+          "description": "Planifiez des builds Conquest of Azeroth autour des talents de classe, arbres de spécialisation, ressources personnalisées, rotations, rôles de donjon, utilité de raid et pression PvP.",
+          "href": "/builds",
+          "displayType": "card-list",
+          "highlights": [
+            {
+              "label": "Arbre de classe",
+              "detail": "Les talents de classe définissent les outils de combat centraux, le flux de ressources, les boutons utilitaires et le confort de leveling."
+            },
+            {
+              "label": "Arbre de spec",
+              "detail": "Les talents de spécialisation affinent votre rôle choisi et transforment le choix du niveau 10 en identité de build durable."
+            },
+            {
+              "label": "Rotations",
+              "detail": "La planification de build doit relier talents, timing des cooldowns, dépenseurs de ressources et mouvements de combat."
+            },
+            {
+              "label": "Loadouts",
+              "detail": "Gardez des configurations séparées pour leveling, donjons, raids, arènes et contenu mondial à haut risque."
+            }
+          ]
+        },
+        {
+          "order": 7,
+          "name": "Donjons et raids Conquest of Azeroth",
+          "description": "Préparez-vous aux routes de donjon, à la progression Mythic+, aux raids multi-difficultés, aux boss mondiaux et aux rôles de groupe après le niveau 60.",
+          "href": "/guide",
+          "displayType": "card-list",
+          "highlights": [
+            {
+              "label": "Mythic+",
+              "detail": "Les donjons Mythic+ récompensent la connaissance des routes, la discipline d'interruption, le timing défensif et la coordination propre des rôles."
+            },
+            {
+              "label": "Raids",
+              "detail": "Les raids multi-difficultés demandent de raffiner builds, équipement, consommables et assignations de combat."
+            },
+            {
+              "label": "Boss mondiaux",
+              "detail": "La préparation des boss mondiaux se concentre sur la survie, l'utilité de groupe, le positionnement et les ajustements rapides de build."
+            },
+            {
+              "label": "Manastorm",
+              "detail": "Manastorm offre aux joueurs endgame une autre cible pour tester les builds, planifier des groupes et obtenir des récompenses."
+            }
+          ]
+        },
+        {
+          "order": 8,
+          "name": "PvP et systèmes endgame Conquest of Azeroth",
+          "description": "Suivez la préparation d'arène, les décisions Hybrid Risk, les zones personnalisées, les objectifs mondiaux et les changements de build pour le jeu avancé.",
+          "href": "/rankings",
+          "displayType": "card-list",
+          "highlights": [
+            {
+              "label": "Arène",
+              "detail": "Les builds d'arène ont besoin de fenêtres de burst, plans de contrôle, cooldowns défensifs et talents adaptés aux matchups."
+            },
+            {
+              "label": "Hybrid Risk",
+              "detail": "Les activités Hybrid Risk récompensent les joueurs capables d'équilibrer meilleures récompenses et danger en monde ouvert."
+            },
+            {
+              "label": "Zones personnalisées",
+              "detail": "Les zones personnalisées étendent la boucle endgame avec de nouveaux objectifs, opportunités de groupe et tests de build."
+            },
+            {
+              "label": "Changements de build",
+              "detail": "Les joueurs avancés gagnent à changer talents, équipement et outils utilitaires entre PvE, PvP et contenu mondial."
+            }
+          ]
+        }
+      ]
+    },
+    "faq": {
+      "title": "Questions fréquentes",
+      "description": "Réponses rapides aux questions les plus courantes sur Conquest of Azeroth.",
+      "items": [
+        {
+          "question": "Qu'est-ce que Conquest of Azeroth ?",
+          "answer": "Conquest of Azeroth est un royaume MMORPG Classic+ personnalisé au sein de Project Ascension avec 21 classes originales, 69 spécialisations, talents personnalisés et systèmes endgame étendus."
+        },
+        {
+          "question": "Conquest of Azeroth est-il World of Warcraft officiel ?",
+          "answer": "Non. Conquest of Azeroth appartient à l'écosystème Project Ascension, et ce wiki est un centre de guides indépendant créé par des fans, pas une sortie officielle Blizzard."
+        },
+        {
+          "question": "Comment les débutants devraient-ils commencer Conquest of Azeroth ?",
+          "answer": "Les débutants devraient créer un compte Ascension, installer le launcher, choisir le royaume Conquest of Azeroth, sélectionner une classe et suivre un parcours niveau 1-60 tout en apprenant talents et équipement."
+        },
+        {
+          "question": "Quelle classe Conquest of Azeroth choisir pour débuter ?",
+          "answer": "Les débutants dans Conquest of Azeroth devraient commencer avec une classe au rôle clair, au flux de ressources indulgent, dotée de bons outils solo et d'une spécialisation adaptée à leur parcours donjon, raid ou PvP préféré."
+        },
+        {
+          "question": "Combien de classes et spécialisations y a-t-il dans Conquest of Azeroth ?",
+          "answer": "Conquest of Azeroth propose 21 classes originales et 69 spécialisations, avec plus de 1000 sorts et talents dans le système de classes personnalisé."
+        },
+        {
+          "question": "Quel est le niveau maximum de Conquest of Azeroth ?",
+          "answer": "Conquest of Azeroth utilise un niveau maximum de 60 et construit sa progression autour des talents de classe, talents de spécialisation, donjons, raids, arènes, boss mondiaux et PvP optionnel à haut risque."
+        },
+        {
+          "question": "Quel contenu endgame Conquest of Azeroth inclut-il ?",
+          "answer": "L'endgame de Conquest of Azeroth inclut donjons Mythic+, raids multi-difficultés, arènes, boss mondiaux, zones personnalisées, Manastorm et activités Hybrid Risk."
+        },
+        {
+          "question": "Où trouver de l'aide pour l'accès et la configuration ?",
+          "answer": "Utilisez la section accès pour la configuration du launcher, les notes free-to-play, l'aide au téléchargement PTR et les détails pour jouer à Conquest of Azeroth."
+        },
+        {
+          "question": "Où suivre les mises à jour de Conquest of Azeroth ?",
+          "answer": "Les joueurs peuvent suivre les mises à jour de Conquest of Azeroth via le site Project Ascension, le Discord officiel, la chaîne YouTube, le compte X, la communauté Reddit, la page de statut serveur et Ascension Database."
+        }
+      ]
+    },
+    "finalCta": {
+      "title": "Prêt à conquérir Azeroth ?",
+      "description": "Du choix de votre première classe et de la planification d'un parcours niveau 1 à la maîtrise des builds niveau 60, donjons Mythic+, raids, arènes et boss mondiaux, ce wiki communautaire vous aide à préparer chaque étape du voyage.",
+      "primary": "Lire les actualités officielles CoA",
+      "secondary": "Télécharger pour PC / Windows"
+    }
+  },
+  "guide": {
+    "overviewTitle": "Guide Conquest of Azeroth",
+    "overviewDescription": "Parcourez guides débutants, parcours de leveling, notes d'équipement, préparation aux donjons, aide au voyage, races et sujets de progression clés pour Conquest of Azeroth."
+  },
+  "release": {
+    "overviewTitle": "Sortie de Conquest of Azeroth",
+    "overviewDescription": "Suivez bêta, bêta ouverte, stress test, date de sortie, sortie complète et couverture du lancement de Conquest of Azeroth."
+  },
+  "access": {
+    "overviewTitle": "Accès Conquest of Azeroth",
+    "overviewDescription": "Trouvez une aide pratique pour jouer à Conquest of Azeroth, avec configuration du launcher, notes free-to-play, téléchargement PTR et accès au royaume."
+  },
+  "classes": {
+    "overviewTitle": "Classes Conquest of Azeroth",
+    "overviewDescription": "Explorez les classes, specs, rôles, ressources et pages propres aux classes comme Bloodmage, Tinker, Starcaller, Venomancer et plus dans Conquest of Azeroth."
+  },
+  "builds": {
+    "overviewTitle": "Builds Conquest of Azeroth",
+    "overviewDescription": "Planifiez talents, arbres de talents, builds de classe, choix de spécialisation et utilisation du calculateur pour les personnages Conquest of Azeroth."
+  },
+  "rankings": {
+    "overviewTitle": "Classements Conquest of Azeroth",
+    "overviewDescription": "Comparez classements de classes, tier lists, choix PvP, options healer, choix tank et puissance de rôle dans le contenu Conquest of Azeroth."
+  },
+  "addons": {
+    "overviewTitle": "Addons Conquest of Azeroth",
+    "overviewDescription": "Configurez addons, WeakAuras, aides d'interface et outils utilitaires qui rendent Conquest of Azeroth plus lisible et plus facile à jouer."
+  },
+  "community": {
+    "overviewTitle": "Communauté Conquest of Azeroth",
+    "overviewDescription": "Suivez Discord, Reddit, nombre de joueurs, ressources communautaires et espaces de discussion de Conquest of Azeroth."
+  },
+  "legal": {
+    "privacyPolicy": {
+      "title": "Politique de confidentialité",
+      "description": "Politique de confidentialité de Wiki Conquest of Azeroth : comment nous traitons les données des visiteurs et la confidentialité sur ce centre de guides créé par des fans.",
+      "content": [
+        "Ce wiki de fans fournit des guides de jeu informatifs pour Conquest of Azeroth. Nous ne demandons pas d'identifiants de compte, mots de passe du launcher, identifiants Discord ni informations privées de paiement.",
+        "Les fournisseurs d'analytique de base, de publicité et d'hébergement peuvent traiter des informations techniques standard comme le type d'appareil, le navigateur, la région approximative et les pages visitées.",
+        "Les liens externes peuvent mener à Project Ascension, Discord, YouTube, Reddit, X ou d'autres destinations communautaires Conquest of Azeroth. Ces services sont régis par leurs propres politiques de confidentialité."
+      ]
+    },
+    "about": {
+      "title": "À propos",
+      "description": "À propos de Wiki Conquest of Azeroth : un centre de guides indépendant créé par des fans couvrant classes, builds, leveling, talents, équipement, donjons, raids, PvP et systèmes endgame.",
+      "content": [
+        "Wiki Conquest of Azeroth est un centre de guides indépendant créé par des fans couvrant classes, builds, leveling, talents, équipement, donjons, raids, PvP et systèmes endgame.",
+        "Le site dirige les joueurs vers les destinations officielles de Project Ascension, notamment le site web, Discord, YouTube, Reddit, X et Ascension Database, tout en séparant le contenu de guides de fans des canaux officiels."
+      ]
+    },
+    "termsOfService": {
+      "title": "Conditions d'utilisation",
+      "description": "Conditions d'utilisation de Wiki Conquest of Azeroth : règles d'usage pour ce centre de guides indépendant créé par des fans.",
+      "content": [
+        "Ce site est un centre de guides indépendant créé par des fans. Le contenu est fourni uniquement à des fins informatives et de divertissement.",
+        "Les systèmes de jeu, classes, builds, talents, donjons, raids, PvP et détails de mises à jour sont couverts comme sujets de guide informatifs pour les joueurs de Conquest of Azeroth.",
+        "En utilisant ce site, vous acceptez de ne pas en faire un mauvais usage, tenter un accès non autorisé ni présenter ce wiki de fans comme une propriété officielle de Project Ascension, Blizzard Entertainment ou World of Warcraft."
+      ]
+    },
+    "copyright": {
+      "title": "Copyright",
+      "description": "Informations de copyright pour Wiki Conquest of Azeroth : propriété et détails de retrait.",
+      "content": [
+        "Conquest of Azeroth, Project Ascension, Warcraft, World of Warcraft, les marques Blizzard Entertainment, logos, médias du jeu et matériaux associés appartiennent à leurs propriétaires respectifs.",
+        "Ce site est une implémentation non officielle de wiki de fans à des fins éducatives, de référence et de présentation de guides.",
+        "Si vous détenez des droits sur du contenu affiché ici et avez une préoccupation, contactez l'opérateur du site pour examen."
+      ]
+    }
+  },
+  "shared": {
+    "menu": "Menu",
+    "toggleTheme": "Changer de thème",
+    "wikiNavigation": "Navigation du wiki",
+    "activeCodes": "Codes actifs",
+    "updated": "Mis à jour",
+    "viewAllCodes": "Voir tous les codes",
+    "inThisSection": "Dans cette section",
+    "tableOfContents": "Table des matières",
+    "nextSteps": "Étapes suivantes",
+    "needHelp": "Besoin d'aide ?",
+    "relatedReading": "Lecture associée",
+    "relatedGuides": "Guides associés",
+    "readMore": "Lire la suite",
+    "officialMedia": "Médias officiels",
+    "home": "Accueil",
+    "noGuidesAvailable": "Aucun guide disponible pour le moment. Revenez bientôt.",
+    "noActiveCode": "Aucun code actif",
+    "noCodesConfirmed": "Aucun code actif Conquest of Azeroth n'est encore disponible.",
+    "futureCodeDrops": "Surveillez le Discord officiel et les canaux Project Ascension pour les prochaines nouveautés."
+  },
+  "footer": {
+    "aboutTitle": "Wiki Conquest of Azeroth",
+    "about": "Wiki Conquest of Azeroth est un centre de guides indépendant créé par des fans couvrant classes, builds, leveling, talents, équipement, donjons, raids, PvP et systèmes endgame. Il n'est pas affilié à Project Ascension, Blizzard Entertainment ni à l'équipe officielle de World of Warcraft.",
+    "quickLinks": "Liens rapides",
+    "guides": "Guides",
+    "legal": "Mentions légales",
+    "copyright": "2026 Wiki Conquest of Azeroth. Non affilié à Project Ascension, Blizzard Entertainment ni à l'équipe officielle de World of Warcraft.",
+    "description": "Royaume MMORPG Classic+ gratuit avec 21 classes originales, 69 specs, plus de 1000 sorts et talents, et un niveau maximum de 60.",
+    "playGame": "Télécharger Conquest of Azeroth pour PC / Windows",
+    "officialDiscord": "Discord officiel",
+    "officialYoutube": "YouTube officiel",
+    "officialWebsite": "Site Project Ascension",
+    "officialStatus": "Statut du serveur",
+    "guideGuide": "Guide",
+    "accessGuide": "Accès",
+    "rankingsGuide": "Classements",
+    "classesGuide": "Classes",
+    "buildsGuide": "Builds",
+    "addonsGuide": "Addons",
+    "releaseGuide": "Sortie",
+    "communityGuide": "Communauté",
+    "privacyPolicy": "Politique de confidentialité",
+    "termsOfService": "Conditions d'utilisation",
+    "officialEvent": "Site Project Ascension",
+    "communityTool": "Ascension Database et outils de build",
+    "officialWiki": "Aperçu officiel des classes Conquest of Azeroth",
+    "officialX": "X officiel",
+    "officialReddit": "Reddit officiel"
+  }
+}
