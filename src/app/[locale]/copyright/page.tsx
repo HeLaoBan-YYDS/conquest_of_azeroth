@@ -10,7 +10,7 @@ type Messages = typeof en;
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const messages = (await getMessages({ locale })) as Messages;
-  const title = `${messages.legal.copyright.title} - ${messages.site.name}`;
+  const title = messages.legal.copyright.title;
   const description = messages.legal.copyright.description;
   const pathname = "/copyright";
   return {

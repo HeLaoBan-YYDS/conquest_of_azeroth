@@ -66,7 +66,7 @@ function ThemeToggle({ label }: { label: string }) {
 }
 
 export function Breadcrumbs({ items }: { items: { label: string; href?: string }[] }) {
-  return <nav className="mb-7 flex flex-wrap items-center gap-2 text-sm text-muted-foreground">{items.map((item, index) => <span key={`${item.label}-${index}`} className="flex items-center gap-2">{index > 0 && <ChevronRight className="h-4 w-4" />}{item.href ? <Link className="hover:text-foreground" href={item.href}>{item.label}</Link> : <span className="text-foreground">{item.label}</span>}</span>)}</nav>;
+  return <nav className="mb-7 flex min-w-0 flex-wrap items-center gap-2 text-sm text-muted-foreground">{items.map((item, index) => <span key={`${item.label}-${index}`} className="flex min-w-0 items-center gap-2">{index > 0 && <ChevronRight className="h-4 w-4 shrink-0" />}{item.href ? <Link className="break-words hover:text-foreground" href={item.href}>{item.label}</Link> : <span className="break-words text-foreground">{item.label}</span>}</span>)}</nav>;
 }
 
 export async function WikiSidebar({ locale, navGroups, currentPath }: { locale: string; navGroups: NavGroup[]; currentPath?: string }) {

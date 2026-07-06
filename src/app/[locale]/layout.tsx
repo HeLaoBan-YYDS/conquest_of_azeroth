@@ -6,8 +6,7 @@ import { getMessages, setRequestLocale } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
 import { notFound } from "next/navigation";
 import { ThemeProvider } from "next-themes";
-import { StickySidebarAd } from "@/components/ads/sticky-sidebar-ad";
-import { StickyTopAd } from "@/components/ads/sticky-top-ad";
+import { StickyAd } from "@/components/ads/sticky-ad";
 import { JsonLd, SiteFooter, SiteHeader } from "@/components/site";
 import { getLocalizedUrl, routing } from "@/i18n/routing";
 import en from "@/locales/en.json";
@@ -31,6 +30,14 @@ const organizationSameAs = [
 ];
 const stickyTopAdKey = process.env.NEXT_PUBLIC_AD_MOBILE_320X50?.trim();
 const stickySidebarAdKey = process.env.NEXT_PUBLIC_AD_SIDEBAR_160X600?.trim();
+const stickyRightSidebarAdKey = process.env.NEXT_PUBLIC_AD_SIDEBAR_160X300?.trim();
+const contentAdOffsetClassName =
+  [
+    stickySidebarAdKey ? "lg:pl-[152px] 2xl:pl-0" : "",
+    stickyRightSidebarAdKey ? "lg:pr-[176px] 2xl:pr-0" : "",
+  ]
+    .filter(Boolean)
+    .join(" ") || undefined;
 
 type Messages = typeof en;
 
@@ -95,9 +102,10 @@ export default async function LocaleLayout({ children, params }: { children: Rea
           <NextIntlClientProvider messages={messages}>
             <JsonLd data={organization} />
             <SiteHeader locale={locale} />
-            <StickyTopAd adKey={stickyTopAdKey} />
-            <StickySidebarAd adKey={stickySidebarAdKey} />
-            <div className={stickySidebarAdKey ? "lg:pl-[152px] 2xl:pl-0" : undefined}>
+            <StickyAd placement="top" type="banner-320x50" adKey={stickyTopAdKey} eager />
+            <StickyAd placement="left-sidebar" type="banner-160x600" adKey={stickySidebarAdKey} eager />
+            <StickyAd placement="right-sidebar" type="banner-160x300" adKey={stickyRightSidebarAdKey} eager />
+            <div className={contentAdOffsetClassName}>
               {children}
               <SiteFooter locale={locale} />
             </div>

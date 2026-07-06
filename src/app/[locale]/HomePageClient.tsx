@@ -27,7 +27,7 @@ function localizeHref(href: string, locale: string) {
 
 export default function HomePageClient({ home, locale, articles, recentArticles }: { home: Home; locale: string; articles: ContentItem[]; recentArticles: ContentItem[] }) {
   return (
-    <div className="space-y-16">
+    <div className="min-w-0 space-y-16">
       {/* Hero Section */}
       <section className="text-center">
         <div className="mx-auto mb-5 flex items-center justify-center gap-2">
@@ -53,7 +53,7 @@ export default function HomePageClient({ home, locale, articles, recentArticles 
       </section>
 
       {/* 最近更新 + 新手教程 两栏布局 */}
-      <section className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr]">
+      <section className="grid min-w-0 gap-8 lg:grid-cols-[0.85fr_1.15fr]">
         {/* 左侧：动态更新 — 最近 8 篇 MDX 文章，支持滚动 */}
         <Card className="border-border bg-card/70 p-5">
           <h2 className="mb-4 text-xl font-bold text-foreground">{home.updates.title}</h2>
@@ -95,7 +95,7 @@ export default function HomePageClient({ home, locale, articles, recentArticles 
 
       {/* Dynamic Content Section — auto-scrolling carousel */}
       {articles.length > 0 && (
-        <section>
+        <section className="min-w-0">
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm font-semibold text-[hsl(var(--nav-theme))]">{home.popular.eyebrow}</p>
@@ -105,16 +105,16 @@ export default function HomePageClient({ home, locale, articles, recentArticles 
               <div className="hidden gap-2 sm:flex">{home.popular.quickLinks.map((link) => <Badge key={link} variant="outline" className="border-border px-3 py-1 text-muted-foreground">{link}</Badge>)}</div>
             )}
           </div>
-          <div className="relative mt-6 overflow-hidden">
+          <div className="relative mt-6 w-full max-w-full overflow-hidden">
             {/* Gradient fade edges */}
             <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-12 bg-gradient-to-r from-background to-transparent" />
             <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-12 bg-gradient-to-l from-background to-transparent" />
-            <div className="flex gap-4 animate-auto-scroll pb-4">
+            <div className="flex w-max gap-4 pb-4 animate-auto-scroll">
               {/* Render cards twice for seamless infinite loop */}
               {[...articles, ...articles].map((article, index) => {
                 const Icon = icons[index % icons.length];
                 return (
-                  <Link key={`${index}-${article.contentType}/${article.slug}`} href={localizeHref(`/${article.contentType}/${article.slug}`, locale)} className="group min-w-[260px] max-w-[300px] flex-shrink-0 rounded-2xl border border-border bg-card/70 p-5 transition hover:border-[hsl(var(--nav-theme-light))]">
+                  <Link key={`${index}-${article.contentType}/${article.slug}`} href={localizeHref(`/${article.contentType}/${article.slug}`, locale)} className="group w-[260px] flex-shrink-0 rounded-2xl border border-border bg-card/70 p-5 transition hover:border-[hsl(var(--nav-theme-light))] sm:w-[300px]">
                     <div className="flex items-center justify-between">
                       <span className="grid h-10 w-10 place-items-center rounded-xl bg-muted text-[hsl(var(--nav-theme))]"><Icon className="h-5 w-5" /></span>
                       {article.metadata.badge && <Badge variant="secondary">{article.metadata.badge}</Badge>}

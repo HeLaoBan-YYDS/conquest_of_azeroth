@@ -32,8 +32,8 @@ const defaultComponents: MDXComponents = {
     </Link>
   ),
   table: ({ children }) => (
-    <div className="my-7 overflow-hidden rounded-xl border border-border bg-card">
-      <table className="w-full text-sm">{children}</table>
+    <div className="my-7 max-w-full overflow-x-auto rounded-xl border border-border bg-card">
+      <table className="min-w-[640px] w-full text-sm">{children}</table>
     </div>
   ),
   thead: ({ children }) => <thead className="bg-muted/70 text-left text-xs uppercase tracking-[0.18em] text-muted-foreground">{children}</thead>,
