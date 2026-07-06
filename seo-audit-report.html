@@ -1,0 +1,689 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Conquest of Azeroth Wiki SEO 审计报告</title>
+  <style>
+    :root {
+      --bg: #f6f7f9;
+      --panel: #ffffff;
+      --text: #18202a;
+      --muted: #5b6675;
+      --line: #dce2ea;
+      --accent: #9a6a18;
+      --accent-2: #16615d;
+      --good: #1f7a43;
+      --warn: #a96300;
+      --bad: #b42318;
+      --info: #2457a6;
+      --code: #f0f3f7;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
+      line-height: 1.65;
+    }
+
+    .page {
+      width: min(1160px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 32px 0 56px;
+    }
+
+    header {
+      background: linear-gradient(135deg, #171b20, #26231b);
+      color: #fff;
+      border-radius: 14px;
+      padding: 32px;
+      box-shadow: 0 18px 44px rgba(15, 23, 42, 0.18);
+    }
+
+    h1, h2, h3 {
+      line-height: 1.22;
+      margin: 0;
+    }
+
+    h1 {
+      font-size: clamp(28px, 4vw, 44px);
+      letter-spacing: 0;
+    }
+
+    h2 {
+      margin-top: 32px;
+      font-size: 24px;
+    }
+
+    h3 {
+      margin-top: 24px;
+      font-size: 18px;
+    }
+
+    p { margin: 10px 0 0; }
+    a { color: var(--info); }
+
+    .meta {
+      margin-top: 14px;
+      color: #d5dae2;
+      max-width: 850px;
+    }
+
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 22px;
+    }
+
+    .metric {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 10px;
+      padding: 14px;
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 28px;
+      line-height: 1.1;
+    }
+
+    .metric span {
+      color: #d7dde7;
+      font-size: 13px;
+    }
+
+    .panel {
+      margin-top: 18px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 22px;
+      box-shadow: 0 6px 24px rgba(15, 23, 42, 0.05);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 14px;
+      font-size: 14px;
+    }
+
+    th, td {
+      border: 1px solid var(--line);
+      padding: 10px 12px;
+      vertical-align: top;
+      text-align: left;
+    }
+
+    th {
+      background: #eef2f6;
+      color: #273241;
+      font-weight: 700;
+    }
+
+    code {
+      background: var(--code);
+      border: 1px solid #dde5ef;
+      border-radius: 5px;
+      padding: 1px 5px;
+      font-family: Consolas, "SFMono-Regular", monospace;
+      font-size: 0.92em;
+    }
+
+    pre {
+      overflow-x: auto;
+      background: #111827;
+      color: #e5e7eb;
+      padding: 14px;
+      border-radius: 10px;
+      font-size: 13px;
+    }
+
+    .tag {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 3px 9px;
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .high { color: #fff; background: var(--bad); }
+    .medium { color: #fff; background: var(--warn); }
+    .low { color: #fff; background: var(--info); }
+    .ok { color: #fff; background: var(--good); }
+
+    .score {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      margin-top: 18px;
+    }
+
+    .score-ring {
+      width: 104px;
+      height: 104px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background:
+        radial-gradient(circle at center, #fff 0 58%, transparent 59%),
+        conic-gradient(var(--accent-2) 0 78%, #d9e2ec 78% 100%);
+      color: #17202a;
+      font-size: 24px;
+      font-weight: 800;
+      flex: 0 0 auto;
+    }
+
+    .note {
+      border-left: 4px solid var(--accent);
+      background: #fff8ea;
+      padding: 12px 14px;
+      border-radius: 8px;
+      color: #4b3a16;
+      margin-top: 14px;
+    }
+
+    .muted { color: var(--muted); }
+    .small { font-size: 13px; }
+
+    ul, ol { padding-left: 22px; margin-top: 10px; }
+    li + li { margin-top: 6px; }
+
+    @media (max-width: 760px) {
+      .summary, .grid { grid-template-columns: 1fr; }
+      header { padding: 22px; }
+      table { display: block; overflow-x: auto; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header>
+      <h1>Conquest of Azeroth Wiki SEO 审计报告</h1>
+      <p class="meta">
+        审计对象：<strong>https://conquest-of-azeroth-1.wiki</strong> 与当前仓库生产构建。
+        报告时间：2026-07-03 18:05:01 +08:00。审计范围覆盖技术 SEO、国际化 SEO、页面级优化、内容质量、移动端基础和性能风险。
+      </p>
+      <div class="summary">
+        <div class="metric"><strong>200</strong><span>sitemap URL</span></div>
+        <div class="metric"><strong>4</strong><span>语言版本</span></div>
+        <div class="metric"><strong>148</strong><span>MDX 内容页</span></div>
+        <div class="metric"><strong>205</strong><span>Next 静态生成页</span></div>
+      </div>
+    </header>
+
+    <section class="panel">
+      <h2>执行摘要</h2>
+      <div class="score">
+        <div class="score-ring">78</div>
+        <div>
+          <h3>整体 SEO 健康度：中上，但移动端与标题体系需要优先处理</h3>
+          <p>
+            站点的基础索引能力较好：HTTPS、robots、sitemap、canonical、hreflang、结构化数据、H1 和内部链接都已经搭好。
+            当前最大风险不是“不能被抓取”，而是移动端横向溢出、标题重复/过长、描述长度控制和部分内容时效冲突会拖累移动体验、SERP 点击率和页面主题清晰度。
+          </p>
+        </div>
+      </div>
+      <div class="note">
+        快速优先级：先修移动端横向溢出，再修重复标题和超长标题，随后整理 meta description 与 release/PTR/alpha 相关内容的一致性。
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>审计方法与证据来源</h2>
+      <table>
+        <tr>
+          <th>项目</th>
+          <th>结果</th>
+        </tr>
+        <tr>
+          <td>构建验证</td>
+          <td><code>npm run build</code> 通过，Next.js 15.3.7 生成 205 个静态页面。</td>
+        </tr>
+        <tr>
+          <td>本地生产抓取</td>
+          <td>使用 <code>next start -p 3000</code> 后抓取 <code>/sitemap.xml</code> 的 200 个 URL；全部返回 200，本地内部链接抽样无 404。</td>
+        </tr>
+        <tr>
+          <td>线上可访问性</td>
+          <td><code>https://conquest-of-azeroth-1.wiki/</code>、<code>/robots.txt</code>、<code>/sitemap.xml</code> 均返回 200；HTTP 到 HTTPS 为 308；HSTS 存在。</td>
+        </tr>
+        <tr>
+          <td>渲染后 DOM 检查</td>
+          <td>用浏览器渲染文章页确认存在 <code>Organization</code>、<code>Article</code>、<code>BreadcrumbList</code> JSON-LD，且 canonical/hreflang 出现在 DOM 中。</td>
+        </tr>
+        <tr>
+          <td>限制说明</td>
+          <td>未接入 Google Search Console、真实排名/流量数据、PageSpeed Insights CrUX 数据，因此索引覆盖、真实 Core Web Vitals 和关键词表现需要后续补充。</td>
+        </tr>
+      </table>
+    </section>
+
+    <section class="panel">
+      <h2>已经做对的地方</h2>
+      <table>
+        <tr>
+          <th>维度</th>
+          <th>审计结果</th>
+          <th>SEO 价值</th>
+        </tr>
+        <tr>
+          <td>Crawlability</td>
+          <td>robots 允许搜索抓取，sitemap 指向正确，线上 sitemap 包含 200 个 URL。</td>
+          <td>搜索引擎可发现核心页面。</td>
+        </tr>
+        <tr>
+          <td>Canonical</td>
+          <td>抽样和全站抓取均显示每页 1 个 canonical，无缺失。</td>
+          <td>降低重复 URL 与默认语言路径带来的规范化风险。</td>
+        </tr>
+        <tr>
+          <td>Hreflang</td>
+          <td>每页输出 5 个 alternate：<code>x-default</code>、<code>en</code>、<code>es</code>、<code>pt-br</code>、<code>fr</code>。</td>
+          <td>多语言页面有基本地域/语言对应关系。</td>
+        </tr>
+        <tr>
+          <td>结构化数据</td>
+          <td>首页有 WebSite/Organization；列表页有 ItemList/BreadcrumbList；文章页有 Article/BreadcrumbList。</td>
+          <td>增强页面类型理解和富结果基础。</td>
+        </tr>
+        <tr>
+          <td>页面结构</td>
+          <td>200 个抓取页面均有 title、description、唯一 H1。</td>
+          <td>基础 on-page SEO 完整。</td>
+        </tr>
+        <tr>
+          <td>链接与图片</td>
+          <td>内部链接抽样无坏链；图片没有缺失 alt 属性，logo 使用空 alt 属于合理装饰图处理。</td>
+          <td>降低抓取断点和可访问性基础风险。</td>
+        </tr>
+      </table>
+    </section>
+
+    <section class="panel">
+      <h2>优先问题清单</h2>
+      <table>
+        <tr>
+          <th>优先级</th>
+          <th>问题</th>
+          <th>证据</th>
+          <th>影响</th>
+          <th>建议</th>
+        </tr>
+        <tr>
+          <td><span class="tag high">高</span></td>
+          <td>移动端横向溢出</td>
+          <td>
+            390px 视口下，首页 <code>documentElement.scrollWidth=20424</code>；
+            文章页 <code>scrollWidth=647</code>。首页超宽元素为 <code>flex gap-4 animate-auto-scroll</code>，
+            文章页由内容列/表格最小宽度撑开。
+          </td>
+          <td>影响移动友好性、用户体验、潜在 CLS/INP 体验指标，也可能降低移动搜索表现。</td>
+          <td>
+            给主内容 grid 子项和首页根容器加 <code>min-w-0</code>；carousel 外层显式 <code>w-full max-w-full overflow-hidden</code>；
+            MDX 表格容器改为 <code>overflow-x-auto</code>，避免撑宽页面。
+          </td>
+        </tr>
+        <tr>
+          <td><span class="tag high">高</span></td>
+          <td>标题重复与过长</td>
+          <td>
+            200 页中 96 页 title 超过 60 字符；同语种重复标题存在 6 组。
+            例：<code>/guide</code>、<code>/guide/conquest-of-azeroth-beginner-guide</code>、
+            <code>/guide/conquest-of-azeroth-dungeon-guide</code> 都输出
+            <code>Conquest of Azeroth Guide - Conquest of Azeroth Wiki</code>。
+          </td>
+          <td>削弱页面主题区分，增加关键词内耗，SERP 截断后点击吸引力下降。</td>
+          <td>
+            为列表页、入门页、地牢页、release 页写唯一 title；英文控制在 50-60 字符左右，非英语按像素和可读性缩短品牌后缀。
+          </td>
+        </tr>
+        <tr>
+          <td><span class="tag medium">中</span></td>
+          <td>Meta description 长度波动较大</td>
+          <td>84 页超过 160 字符，16 页低于 120 字符；无缺失、无重复。</td>
+          <td>过长描述容易在搜索结果被截断；过短描述浪费卖点空间。</td>
+          <td>优先改首页、栏目页、核心英文页和对应多语言页，目标 120-155 字符，包含搜索意图和明确收益。</td>
+        </tr>
+        <tr>
+          <td><span class="tag medium">中</span></td>
+          <td>内容时效与站内语义存在冲突</td>
+          <td>
+            首页宣称 <code>Full Release Jul 3, 2026</code>，但部分指南正文仍出现
+            <code>Alpha Phase 2</code>、PTR、频繁平衡补丁等早期阶段表述。
+          </td>
+          <td>降低信任信号和内容新鲜度，尤其是 release/access/how-to-play 类搜索意图。</td>
+          <td>
+            建立 launch day 内容清单：release、open beta、PTR、how to play、beginner guide、download/access 页面先更新。
+            保留历史信息时加“历史阶段”说明，避免与当前状态混在一起。
+          </td>
+        </tr>
+        <tr>
+          <td><span class="tag medium">中</span></td>
+          <td>sitemap 的 <code>lastmod</code> 全部使用构建时间</td>
+          <td>线上 sitemap 200 个 URL 全部 <code>lastmod=2026-07-03T08:59:59.687Z</code>。</td>
+          <td>搜索引擎无法区分真实更新页面和未变化页面，长期会降低 lastmod 信号可信度。</td>
+          <td>从 MDX <code>metadata.lastModified</code> 或 git/content 更新时间生成每页 lastmod；没有更新时不要随构建刷新。</td>
+        </tr>
+        <tr>
+          <td><span class="tag low">低</span></td>
+          <td>sitemap 未包含 hreflang alternate</td>
+          <td>sitemap 有 200 个 <code>&lt;loc&gt;</code>，但 <code>xhtml:link</code> 数量为 0；HTML head 已输出 hreflang。</td>
+          <td>当前不是阻断项，但多语言站在规模扩大后，用 sitemap 集中维护 hreflang 更稳。</td>
+          <td>保留 HTML hreflang，同时考虑在 sitemap 增加 <code>xhtml:link</code> 或 Next sitemap alternates。</td>
+        </tr>
+        <tr>
+          <td><span class="tag low">低</span></td>
+          <td><code>pt-br</code> 大小写不够规范</td>
+          <td>HTML 输出 <code>hreflang="pt-br"</code>。</td>
+          <td>hreflang 大小写通常不构成严重问题，但规范写法更推荐 <code>pt-BR</code>。</td>
+          <td>保留 URL 路径 <code>/pt-br</code> 不变，输出 hreflang 时映射为 <code>pt-BR</code>。</td>
+        </tr>
+        <tr>
+          <td><span class="tag low">低</span></td>
+          <td>Cloudflare Managed robots 阻止部分 AI 爬虫</td>
+          <td>线上 robots 允许搜索，但对 <code>GPTBot</code>、<code>ClaudeBot</code>、<code>Google-Extended</code> 等 Disallow。</td>
+          <td>对传统 Google/Bing 搜索不是负面；如果未来要做 AI 搜索可见性，会限制部分模型训练或引用抓取。</td>
+          <td>仅当站点目标包含 AI 搜索曝光时，再评估 Cloudflare Bot/Content Signals 策略。</td>
+        </tr>
+      </table>
+    </section>
+
+    <section class="panel">
+      <h2>移动端问题定位</h2>
+      <div class="grid">
+        <div>
+          <h3>首页溢出</h3>
+          <p>
+            文件位置：<code>src/app/[locale]/HomePageClient.tsx</code> 的 auto-scrolling carousel，
+            以及 <code>src/app/globals.css</code> 的 <code>.animate-auto-scroll</code>。
+          </p>
+          <pre><code>390px viewport:
+innerWidth = 390
+document scrollWidth = 20424
+overflow element = div.flex.gap-4.animate-auto-scroll</code></pre>
+        </div>
+        <div>
+          <h3>文章页溢出</h3>
+          <p>
+            文件位置：<code>src/app/[locale]/[...slug]/page.tsx</code> 的文章布局，
+            以及 <code>src/mdx-components.tsx</code> 的表格组件。
+          </p>
+          <pre><code>390px viewport:
+innerWidth = 390
+document scrollWidth = 647
+article width = 631
+table wrapper overflow hidden but still contributes to min-content width</code></pre>
+        </div>
+      </div>
+      <h3>推荐修复方向</h3>
+      <pre><code>// HomePageClient 根节点
+&lt;div className="min-w-0 space-y-16"&gt;
+
+// carousel section / wrapper
+&lt;section className="min-w-0"&gt;
+  &lt;div className="relative mt-6 w-full max-w-full overflow-hidden"&gt;
+    &lt;div className="flex w-max gap-4 animate-auto-scroll pb-4"&gt;
+
+// 文章页主内容
+&lt;article className="min-w-0"&gt;
+&lt;aside className="min-w-0 space-y-6"&gt;
+
+// MDX table
+&lt;div className="my-7 overflow-x-auto rounded-xl border border-border bg-card"&gt;
+  &lt;table className="min-w-[640px] w-full text-sm"&gt;</code></pre>
+    </section>
+
+    <section class="panel">
+      <h2>On-Page SEO 细节</h2>
+      <table>
+        <tr>
+          <th>检查项</th>
+          <th>结果</th>
+          <th>建议</th>
+        </tr>
+        <tr>
+          <td>Title</td>
+          <td>无缺失；96/200 过长；同语种存在重复。</td>
+          <td>核心页先改：homepage、8 个栏目页、release/access/classes/builds/rankings 的重点文章。</td>
+        </tr>
+        <tr>
+          <td>Description</td>
+          <td>无缺失、无重复；84 过长，16 偏短。</td>
+          <td>每页突出一个主搜索意图，例如 beginner、download、release date、tier list、talent calculator。</td>
+        </tr>
+        <tr>
+          <td>H1</td>
+          <td>200 页均为 1 个 H1。</td>
+          <td>保持；但重复 title 的页面也应同步优化 H1 或首段，让页面差异更明显。</td>
+        </tr>
+        <tr>
+          <td>Heading 层级</td>
+          <td>文章页主要为 H1/H2/H3，结构健康。</td>
+          <td>列表页可考虑补充一个简短 H2 引导区，提升栏目页内容厚度。</td>
+        </tr>
+        <tr>
+          <td>图片</td>
+          <td>无缺失 alt；首页 hero 图片 75 KB，trailer thumbnail 255 KB。</td>
+          <td>保持 WebP；预览图可继续压缩或按尺寸输出多版本。</td>
+        </tr>
+      </table>
+    </section>
+
+    <section class="panel">
+      <h2>国际化 SEO</h2>
+      <p>
+        当前四语种 URL 数量均衡：<code>en=50</code>、<code>es=50</code>、<code>pt-br=50</code>、<code>fr=50</code>。
+        默认英文不带 <code>/en</code> 前缀，<code>/en</code> 和 <code>/en/guide</code> 会跳转到无前缀版本，canonical 也指向无前缀版本。
+      </p>
+      <table>
+        <tr>
+          <th>检查项</th>
+          <th>结果</th>
+          <th>风险</th>
+        </tr>
+        <tr>
+          <td>自引用 hreflang</td>
+          <td>抽样页面包含自身语言 alternate。</td>
+          <td><span class="tag ok">低</span></td>
+        </tr>
+        <tr>
+          <td>x-default</td>
+          <td>存在，指向英文默认页面。</td>
+          <td><span class="tag ok">低</span></td>
+        </tr>
+        <tr>
+          <td>跨语种 canonical</td>
+          <td>未发现跨语种 canonical；各语言页面自 canonical。</td>
+          <td><span class="tag ok">低</span></td>
+        </tr>
+        <tr>
+          <td>语言代码</td>
+          <td><code>pt-br</code> 建议输出为 <code>pt-BR</code>。</td>
+          <td><span class="tag low">低</span></td>
+        </tr>
+        <tr>
+          <td>sitemap hreflang</td>
+          <td>未使用 <code>xhtml:link</code>。</td>
+          <td><span class="tag low">低</span></td>
+        </tr>
+      </table>
+    </section>
+
+    <section class="panel">
+      <h2>性能与 Core Web Vitals 风险</h2>
+      <table>
+        <tr>
+          <th>指标/观察</th>
+          <th>证据</th>
+          <th>建议</th>
+        </tr>
+        <tr>
+          <td>线上响应抽样</td>
+          <td>首页 TTFB 抽样约 1.85s，总时间约 2.50s；文章页 TTFB 约 1.98s，总时间约 2.74s。该结果受测试地点和网络影响。</td>
+          <td>用 PageSpeed Insights 和 Search Console CWV 报告确认真实用户数据；关注移动端 LCP/INP。</td>
+        </tr>
+        <tr>
+          <td>HTML 体积</td>
+          <td>本地生产 HTML：英文首页约 248 KB；法语首页约 260 KB；文章样例约 173 KB。</td>
+          <td>减少首页重复 DOM，尤其是无限滚动卡片把文章渲染两遍；只展示精选 12-16 张卡片或使用更轻量实现。</td>
+        </tr>
+        <tr>
+          <td>JS 体积</td>
+          <td>构建输出 First Load JS 首页约 162 KB；<code>.next/static</code> JS 总量约 944 KB。</td>
+          <td>检查客户端组件边界，尽量把非交互内容留在 Server Component；视频弹窗、手风琴、主题切换等按需拆分。</td>
+        </tr>
+        <tr>
+          <td>移动端溢出</td>
+          <td>首页和文章页均有横向滚动。</td>
+          <td>作为性能和移动友好性的第一优先级修复。</td>
+        </tr>
+      </table>
+    </section>
+
+    <section class="panel">
+      <h2>内容质量与搜索意图</h2>
+      <p>
+        站点内容量充足，覆盖 guide、release、access、classes、builds、rankings、addons、community 八类主题。
+        当前更需要从“批量覆盖”进入“意图匹配和内容可信度”阶段。
+      </p>
+      <table>
+        <tr>
+          <th>内容主题</th>
+          <th>发现</th>
+          <th>优化建议</th>
+        </tr>
+        <tr>
+          <td>Release / Access</td>
+          <td>站点首页已进入 full release 叙事，但部分页面仍是 beta/PTR/alpha 叙事。</td>
+          <td>把 release date、full release、how to play、download、PTR 页面拆清“当前状态”和“历史阶段”。</td>
+        </tr>
+        <tr>
+          <td>Guide</td>
+          <td>beginner guide 和 dungeon guide 共享标题，容易互相竞争。</td>
+          <td>入门指南聚焦安装、选职业、1-10 级、前 60 分钟；地牢指南聚焦 RDF、Mana Storms、Mythic+、队伍职责。</td>
+        </tr>
+        <tr>
+          <td>Rankings</td>
+          <td>tier list、healer tier list、PvP tier list 主题相近。</td>
+          <td>增加更新时间、版本依据、适用场景和免责声明，减少“一个榜单解释所有场景”。</td>
+        </tr>
+        <tr>
+          <td>E-E-A-T</td>
+          <td>有 fan-made 与法律声明，但作者/更新机制不明显。</td>
+          <td>在文章页展示“最后更新、适用版本、资料来源、编辑说明”；核心榜单可加方法论。</td>
+        </tr>
+      </table>
+    </section>
+
+    <section class="panel">
+      <h2>结构化数据</h2>
+      <p>
+        渲染后检查确认文章页存在 <code>Organization</code>、<code>Article</code>、<code>BreadcrumbList</code>。
+        当前结构化数据基础良好，下一步可按内容类型细化。
+      </p>
+      <ul>
+        <li>文章页：保留 Article，补充更可靠的 <code>dateModified</code> 来源。</li>
+        <li>FAQ：MDX 中大量 FAQ 段落目前不是 FAQPage JSON-LD。可考虑仅对高价值页面生成 FAQPage，但不要滥用。</li>
+        <li>面包屑：已输出 BreadcrumbList，继续保持。</li>
+        <li>组织信息：Organization sameAs 较完整，适合 fan wiki 站点。</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>优先行动计划</h2>
+      <table>
+        <tr>
+          <th>时间</th>
+          <th>任务</th>
+          <th>验收标准</th>
+        </tr>
+        <tr>
+          <td>0-3 天</td>
+          <td>修复首页与文章页移动端横向溢出。</td>
+          <td>390px、414px、768px 视口下 <code>documentElement.scrollWidth &lt;= innerWidth + 1</code>。</td>
+        </tr>
+        <tr>
+          <td>0-7 天</td>
+          <td>修复同语种重复 title，优先英文和主要入口页。</td>
+          <td>同语言内无重复 title；核心页 title 不超过约 60 字符。</td>
+        </tr>
+        <tr>
+          <td>0-7 天</td>
+          <td>压缩过长 description，补足偏短 description。</td>
+          <td>核心页 description 控制在 120-155 字符附近，语义不重复。</td>
+        </tr>
+        <tr>
+          <td>7-14 天</td>
+          <td>更新 release/access/PTR/alpha 相关内容。</td>
+          <td>每页明确“当前版本/当前阶段/历史阶段”，避免与首页 full release 冲突。</td>
+        </tr>
+        <tr>
+          <td>7-21 天</td>
+          <td>改造 sitemap lastmod，并评估 sitemap hreflang。</td>
+          <td>每个 URL 使用内容真实更新时间；sitemap 不再每次构建全量刷新 lastmod。</td>
+        </tr>
+        <tr>
+          <td>14-30 天</td>
+          <td>接入 GSC 数据做第二轮审计。</td>
+          <td>拿到索引覆盖、查询词、展示/点击、CWV、页面体验和 hreflang 反馈。</td>
+        </tr>
+      </table>
+    </section>
+
+    <section class="panel">
+      <h2>附录：关键数据</h2>
+      <div class="grid">
+        <div>
+          <h3>全站抓取统计</h3>
+          <ul>
+            <li>sitemap URL：200</li>
+            <li>语言分布：en 50、es 50、pt-br 50、fr 50</li>
+            <li>非 200 页面：0</li>
+            <li>缺失 title：0</li>
+            <li>缺失 description：0</li>
+            <li>缺失 canonical：0</li>
+            <li>H1 数量异常：0</li>
+            <li>JSON-LD 缺失或解析错误：0</li>
+            <li>内部链接坏链抽样：0</li>
+          </ul>
+        </div>
+        <div>
+          <h3>问题统计</h3>
+          <ul>
+            <li>title 超过 60 字符：96 页</li>
+            <li>description 超过 160 字符：84 页</li>
+            <li>description 少于 120 字符：16 页</li>
+            <li>同语种重复 title：en 1 组、es 2 组、pt-br 2 组、fr 1 组</li>
+            <li>sitemap <code>xhtml:link</code>：0</li>
+            <li>sitemap <code>lastmod</code> 全为同一构建时间：200/200</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>结论</h2>
+      <p>
+        这个站点的 SEO 基础不是薄弱型，反而已经具备多语言内容站该有的大部分骨架。
+        下一轮增长的关键，是把技术细节从“能输出”推进到“输出得更干净”：移动端不溢出、标题不互相撞车、描述更像 SERP 广告文案、内容状态与 2026-07-03 full release 叙事保持一致。
+      </p>
+      <p class="muted small">
+        报告文件由本地仓库审计生成：<code>D:\code\conquest-of-azeroth\seo-audit-report.html</code>
+      </p>
+    </section>
+  </main>
+</body>
+</html>
