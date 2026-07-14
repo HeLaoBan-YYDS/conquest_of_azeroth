@@ -1,387 +1,197 @@
-import fs from "fs";
-import path from "path";
-import { CONTENT_TYPES as CONFIG_CONTENT_TYPES } from "@/config/navigation";
-import { toHeadingId } from "@/lib/heading-slug";
-import { routing, type Locale } from "@/i18n/routing";
+// Cloudflare Workers 兼容版本的内容加载器
+//
+// 历史实现用 fs.readFileSync 读 MDX 源文件提取 headings/动态列举目录,
+// Workers 运行时没有 fs,所以这些操作都被搬到 prebuild 脚本
+// (scripts/extract-content.mjs) 在构建期一次性完成,结果落到
+// src/generated/content-index.json 随 bundle 静态打入。
+//
+// MDX 主体仍走 webpack `require.context` 静态收集所有 .mdx 模块,
+// 运行时通过模块 key (e.g. "en/guide/foo") 直接引用,无任何运行时 IO。
 
-// 从统一配置导入内容类型
+import type { ComponentType } from "react";
+import { CONTENT_TYPES as CONFIG_CONTENT_TYPES } from "@/config/navigation";
+import type { Locale } from "@/i18n/routing";
+import { routing } from "@/i18n/routing";
+import contentIndexData from "@/generated/content-index.json";
+
+// === 类型 ===
+
 export const CONTENT_TYPES = CONFIG_CONTENT_TYPES;
 
-/**
- * 将文件名转换为 URL-safe slug
- * 所有非字母数字连字符下划线的字符（冒号、问号、井号、空格等）替换为 -
- * 合并连续的 -，去掉首尾 -
- */
-export function fileNameToSlug(fileName: string): string {
-  return fileName
-    .replace(/\.mdx$/, "")
-    .replace(/[^a-zA-Z0-9\-_]/g, "-")
-    .replace(/-+/g, "-")
-    .replace(/^-|-$/g, "");
-}
-
-/**
- * 根据 slug 在目录中反查真实文件名（不含 .mdx）
- * 例如 slug="gelum-boss" → 返回 "gelum:boss"
- */
-export function findFileBySlug(dir: string, slug: string, basePath: string[] = []): string | null {
-  if (!fs.existsSync(dir)) return null;
-  const entries = fs.readdirSync(dir, { withFileTypes: true });
-  for (const entry of entries) {
-    const fullPath = path.join(dir, entry.name);
-    if (entry.isDirectory()) {
-      const result = findFileBySlug(fullPath, slug, [...basePath, entry.name]);
-      if (result) return result;
-    } else if (entry.name.endsWith(".mdx")) {
-      const fileName = entry.name.replace(".mdx", "");
-      const entrySlug = [...basePath, fileNameToSlug(fileName)].join("/");
-      if (entrySlug === slug) {
-        return [...basePath, fileName].join("/");
-      }
-    }
-  }
-  return null;
-}
-
-// 通用 Metadata 接口（与 MDX 文件 export const metadata 对应）
 export interface ContentMetadata {
-  title: string;
-  description: string;
-  category: string;
-  date: string;
-  lastModified?: string;
-  image?: string;
-  badge?: string;
-  summary?: string;
+	title: string;
+	description: string;
+	category: string;
+	date: string;
+	lastModified?: string;
+	image?: string;
+	badge?: string;
+	summary?: string;
 }
 
-// Heading 结构（从 MDX 源文件提取）
 export interface Heading {
-  id: string;
-  text: string;
-  level: number;
+	id: string;
+	text: string;
+	level: number;
 }
 
-// 内容项接口
 export interface ContentItem {
-  slug: string;
-  segments: string[];
-  contentType: string;
-  locale: Locale;
-  metadata: ContentMetadata;
+	slug: string;
+	segments: string[];
+	contentType: string;
+	locale: Locale;
+	metadata: ContentMetadata;
 }
 
-// 内容数据接口（含 MDX 组件）
-export type ContentData = {
-  slug: string;
-  segments: string[];
-  contentType: string;
-  locale: Locale;
-  metadata: ContentMetadata;
-  MDXContent: React.ComponentType;
-  headings: Heading[];
-};
-
-const CONTENT_ROOT = path.join(process.cwd(), "content");
-
-/**
- * 从 MDX 源文件中提取 ## 和 ### 标题
- */
-function extractHeadings(mdxSource: string): Heading[] {
-  const headings: Heading[] = [];
-  const lines = mdxSource.split("\n");
-  for (const line of lines) {
-    const match = line.match(/^(#{2,3})\s+(.+)/);
-    if (match) {
-      const level = match[1].length;
-      const text = match[2].replace(/\{[^}]*\}/g, "").trim();
-      const id = toHeadingId(text);
-      headings.push({ id, text, level });
-    }
-  }
-  return headings;
+export interface ContentData {
+	slug: string;
+	segments: string[];
+	contentType: string;
+	locale: Locale;
+	metadata: ContentMetadata;
+	MDXContent: ComponentType;
+	headings: Heading[];
 }
 
-/**
- * 读取 MDX 源文件并提取 headings
- */
-function getHeadingsFromFile(filePath: string): Heading[] {
-  try {
-    const source = fs.readFileSync(filePath, "utf-8");
-    return extractHeadings(source);
-  } catch {
-    return [];
-  }
-}
-
-/**
- * 辅助函数：递归获取目录下所有 MDX 文件的 slug 路径
- */
-function getSlugsFromDirectory(dir: string, basePath: string[] = []): string[][] {
-  if (!fs.existsSync(dir)) return [];
-  const entries = fs.readdirSync(dir, { withFileTypes: true });
-  const paths: string[][] = [];
-
-  for (const entry of entries) {
-    const fullPath = path.join(dir, entry.name);
-    if (entry.isDirectory()) {
-      paths.push(...getSlugsFromDirectory(fullPath, [...basePath, entry.name]));
-    } else if (entry.name.endsWith(".mdx")) {
-      const fileName = entry.name.replace(".mdx", "");
-      paths.push([...basePath, fileNameToSlug(fileName)]);
-    }
-  }
-  return paths;
-}
-
-/**
- * 获取所有内容列表（支持递归读取嵌套目录）
- * 使用动态 import 获取 MDX 文件的 metadata
- */
-export async function getAllContent(contentType: string, language: Locale): Promise<ContentItem[]> {
-  const contentDir = path.join(CONTENT_ROOT, language, contentType);
-  const slugPaths = getSlugsFromDirectory(contentDir);
-
-  const items = await Promise.all(
-    slugPaths.map(async (segments) => {
-      const slug = segments.join("/");
-      try {
-        const realSlug = findFileBySlug(contentDir, slug) || slug;
-        const mod = await import(`../../content/${language}/${contentType}/${realSlug}.mdx`);
-        return {
-          slug,
-          segments,
-          contentType,
-          locale: language,
-          metadata: mod.metadata as ContentMetadata,
-        } satisfies ContentItem;
-      } catch {
-        return null;
-      }
-    }),
-  );
-
-  return items
-    .filter((item): item is ContentItem => Boolean(item))
-    .sort((a, b) => a.metadata.title.localeCompare(b.metadata.title));
-}
-
-/**
- * 获取单个内容项（含 MDX 渲染后的内容组件）
- * 使用动态 import 直接导入 .mdx 文件
- */
-export async function getContent(contentType: string, slugSegments: string[], language: Locale): Promise<ContentData | null> {
-  const currentSlug = slugSegments.join("/");
-  const contentDir = path.join(CONTENT_ROOT, language, contentType);
-
-  try {
-    const realSlug = findFileBySlug(contentDir, currentSlug) || currentSlug;
-    const mdxPath = path.join(contentDir, `${realSlug}.mdx`);
-    const { default: MDXContent, metadata } = await import(
-      `../../content/${language}/${contentType}/${realSlug}.mdx`
-    );
-
-    return {
-      slug: currentSlug,
-      segments: slugSegments,
-      contentType,
-      locale: language,
-      metadata: metadata as ContentMetadata,
-      MDXContent,
-      headings: getHeadingsFromFile(mdxPath),
-    };
-  } catch {
-    // Fallback 到英文
-    if (language !== routing.defaultLocale) {
-      try {
-        const enContentDir = path.join(CONTENT_ROOT, routing.defaultLocale, contentType);
-        const enRealSlug = findFileBySlug(enContentDir, currentSlug) || currentSlug;
-        const enMdxPath = path.join(enContentDir, `${enRealSlug}.mdx`);
-        const { default: MDXContent, metadata } = await import(
-          `../../content/${routing.defaultLocale}/${contentType}/${enRealSlug}.mdx`
-        );
-        return {
-          slug: currentSlug,
-          segments: slugSegments,
-          contentType,
-          locale: routing.defaultLocale,
-          metadata: metadata as ContentMetadata,
-          MDXContent,
-          headings: getHeadingsFromFile(enMdxPath),
-        };
-      } catch {
-        return null;
-      }
-    }
-    return null;
-  }
-}
-
-/**
- * 导航分组结构（用于动态 Wiki Navigation）
- */
 export interface NavGroup {
-  /** 分组标题，来自目录名转人类可读格式，如 "bosses" → "Bosses" */
-  title: string;
-  /** 该分组下的文章数量 */
-  count: number;
-  /** 分组 slug（即目录名，如 "bosses"） */
-  slug: string;
-  /** 文章链接列表 */
-  links: Array<{ label: string; href: string; badge?: string }>;
+	title: string;
+	count: number;
+	slug: string;
+	links: Array<{ label: string; href: string; badge?: string }>;
 }
 
-// 分组标题映射：slug → 人类可读标题（默认英文）
-const GROUP_TITLES: Record<string, string> = {
-  guide: "Guide",
-  release: "Release",
-  access: "Access",
-  classes: "Classes",
-  builds: "Builds",
-  rankings: "Rankings",
-  addons: "Addons",
-  community: "Community",
-};
+// === 预构建索引形状 ===
 
-const GROUP_TITLES_ES: Record<string, string> = {
-  guide: "Guia",
-  release: "Lanzamiento",
-  access: "Acceso",
-  classes: "Clases",
-  builds: "Builds",
-  rankings: "Rankings",
-  addons: "Addons",
-  community: "Comunidad",
-};
+interface IndexEntry {
+	slug: string;
+	segments: string[];
+	contentType: string;
+	locale: string;
+	metadata: ContentMetadata;
+	headings: Heading[];
+	realPath: string;
+}
 
-const GROUP_TITLES_PT_BR: Record<string, string> = {
-  guide: "Guia",
-  release: "Lancamento",
-  access: "Acesso",
-  classes: "Classes",
-  builds: "Builds",
-  rankings: "Rankings",
-  addons: "Addons",
-  community: "Comunidade",
-};
+interface ContentIndex {
+	entries: IndexEntry[];
+	paths: Array<{ contentType: string; slug: string[] }>;
+	navigation: Record<string, NavGroup[]>;
+}
 
-const GROUP_TITLES_FR: Record<string, string> = {
-  guide: "Guide",
-  release: "Sortie",
-  access: "Acces",
-  classes: "Classes",
-  builds: "Builds",
-  rankings: "Classements",
-  addons: "Addons",
-  community: "Communaute",
-};
+const contentIndex = contentIndexData as ContentIndex;
 
-// locale → 分组标题映射
-const GROUP_TITLES_BY_LOCALE: Record<string, Record<string, string>> = {
-  es: GROUP_TITLES_ES,
-  fr: GROUP_TITLES_FR,
-  "pt-br": GROUP_TITLES_PT_BR,
-};
+// === MDX 静态加载 (webpack require.context) ===
 
-// locale → "Overview" 翻译
-const OVERVIEW_LABEL_BY_LOCALE: Record<string, string> = {
-  es: "Resumen",
-  fr: "Apercu",
-  "pt-br": "Visao geral",
-};
+interface MdxModule {
+	default: ComponentType;
+	metadata: ContentMetadata;
+}
 
-// 分组排序顺序
-const GROUP_ORDER: string[] = [
-  "guide", "release", "access", "classes", "builds", "rankings", "addons", "community",
-];
+const mdxContext = require.context(
+	"../../content",
+	true,
+	/\.mdx$/,
+);
 
-/**
- * 动态生成 Wiki Navigation 分组
- * 扫描 content/<locale>/ 下的所有 MDX 文件，按子目录分组
- * 同时为列表页添加 Overview 入口
- */
+const mdxModulesByKey: Record<string, MdxModule> = {};
+for (const key of mdxContext.keys()) {
+	// key 形如 "./en/guide/foo.mdx" -> 归一化为 "en/guide/foo"
+	const normalized = key.replace(/^\.\//, "").replace(/\.mdx$/, "");
+	mdxModulesByKey[normalized] = mdxContext(key) as MdxModule;
+}
+
+function getMdx(locale: string, contentType: string, realPath: string): MdxModule | undefined {
+	return mdxModulesByKey[`${locale}/${contentType}/${realPath}`];
+}
+
+// === 索引查询 ===
+
+function findEntry(
+	locale: Locale,
+	contentType: string,
+	slugSegments: string[],
+): IndexEntry | undefined {
+	const slug = slugSegments.join("/");
+	return contentIndex.entries.find(
+		(e) => e.locale === locale && e.contentType === contentType && e.slug === slug,
+	);
+}
+
+// === 公共 API ===
+
+export async function getAllContent(
+	contentType: string,
+	language: Locale,
+): Promise<ContentItem[]> {
+	return contentIndex.entries
+		.filter((e) => e.locale === language && e.contentType === contentType)
+		.map((e) => ({
+			slug: e.slug,
+			segments: e.segments,
+			contentType: e.contentType,
+			locale: e.locale as Locale,
+			metadata: e.metadata,
+		}))
+		.sort((a, b) => a.metadata.title.localeCompare(b.metadata.title));
+}
+
+export async function getContent(
+	contentType: string,
+	slugSegments: string[],
+	language: Locale,
+): Promise<ContentData | null> {
+	const currentSlug = slugSegments.join("/");
+
+	const entry = findEntry(language, contentType, slugSegments);
+	if (entry) {
+		const mdx = getMdx(entry.locale, entry.contentType, entry.realPath);
+		if (mdx) {
+			return {
+				slug: entry.slug,
+				segments: entry.segments,
+				contentType: entry.contentType,
+				locale: entry.locale as Locale,
+				metadata: entry.metadata,
+				MDXContent: mdx.default,
+				headings: entry.headings,
+			};
+		}
+	}
+
+	// Fallback 到 default locale
+	if (language !== routing.defaultLocale) {
+		const fallback = findEntry(routing.defaultLocale, contentType, slugSegments);
+		if (fallback) {
+			const mdx = getMdx(fallback.locale, fallback.contentType, fallback.realPath);
+			if (mdx) {
+				return {
+					slug: fallback.slug,
+					segments: fallback.segments,
+					contentType: fallback.contentType,
+					locale: fallback.locale as Locale,
+					metadata: fallback.metadata,
+					MDXContent: mdx.default,
+					headings: fallback.headings,
+				};
+			}
+		}
+	}
+
+	return null;
+}
+
 export function getDynamicNavigation(language: Locale = "en"): NavGroup[] {
-  const localeDir = path.join(CONTENT_ROOT, language);
-  if (!fs.existsSync(localeDir)) return [];
-
-  const entries = fs.readdirSync(localeDir, { withFileTypes: true });
-  const groups: NavGroup[] = [];
-
-  for (const entry of entries) {
-    if (!entry.isDirectory()) continue;
-    const groupSlug = entry.name;
-    // 跳过不在 CONTENT_TYPES 中的目录，避免显示会 404 的导航链接
-    if (!CONTENT_TYPES.includes(groupSlug as typeof CONTENT_TYPES[number])) continue;
-    const groupDir = path.join(localeDir, groupSlug);
-    const slugPaths = getSlugsFromDirectory(groupDir);
-
-    if (slugPaths.length === 0) continue;
-
-    const links: NavGroup["links"] = [];
-    // 添加 Overview 入口（按 locale 翻译）
-    const overviewLabel = OVERVIEW_LABEL_BY_LOCALE[language] || "Overview";
-    links.push({ label: overviewLabel, href: `/${groupSlug}` });
-
-    for (const segments of slugPaths) {
-      const articleSlug = segments.join("/");
-      const mdxFilePath = findFileBySlug(groupDir, articleSlug);
-      if (!mdxFilePath) continue;
-
-      const fullPath = path.join(groupDir, `${mdxFilePath}.mdx`);
-      let title = segments[segments.length - 1].replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
-      let badge: string | undefined;
-
-      try {
-        const source = fs.readFileSync(fullPath, "utf-8");
-        // 提取 metadata.title
-        const titleMatch = source.match(/title:\s*["'](.+?)["']/);
-        if (titleMatch) title = titleMatch[1];
-        // 提取 metadata.badge
-        const badgeMatch = source.match(/badge:\s*["'](.+?)["']/);
-        if (badgeMatch) badge = badgeMatch[1];
-      } catch {
-        // 读取失败用默认标题
-      }
-
-      links.push({ label: title, href: `/${groupSlug}/${articleSlug}`, badge });
-    }
-
-    // 优先使用 locale 特定标题，否则回退到英文默认
-    const localTitles = GROUP_TITLES_BY_LOCALE[language] || {};
-    const groupTitle = localTitles[groupSlug] || GROUP_TITLES[groupSlug] || groupSlug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
-
-    groups.push({
-      title: groupTitle,
-      count: links.length - 1, // 减去 Overview
-      slug: groupSlug,
-      links,
-    });
-  }
-
-  // 按 GROUP_ORDER 排序
-  groups.sort((a, b) => {
-    const ai = GROUP_ORDER.indexOf(a.slug);
-    const bi = GROUP_ORDER.indexOf(b.slug);
-    return (ai === -1 ? 999 : ai) - (bi === -1 ? 999 : bi);
-  });
-
-  return groups;
+	return (
+		contentIndex.navigation[language] ||
+		contentIndex.navigation[routing.defaultLocale] ||
+		[]
+	);
 }
 
-/**
- * 获取所有内容路径（用于 generateStaticParams）
- */
 export async function getAllContentPaths(language: Locale) {
-  const localeDir = path.join(CONTENT_ROOT, language);
-  if (!fs.existsSync(localeDir)) return [];
-
-  const entries = fs.readdirSync(localeDir, { withFileTypes: true });
-  const contentTypeDirs = entries.filter((entry) => entry.isDirectory() && CONTENT_TYPES.includes(entry.name));
-
-  const paths = contentTypeDirs.flatMap((entry) => {
-    const segments = getSlugsFromDirectory(path.join(localeDir, entry.name));
-    return segments.map((slug) => ({ contentType: entry.name, slug }));
-  });
-
-  return paths;
+	// generateStaticParams 只用 en 即可;其它 locale 由 middleware 重写,SSG 复用同一组页面
+	if (language === routing.defaultLocale) {
+		return contentIndex.paths;
+	}
+	return [];
 }
